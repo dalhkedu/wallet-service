@@ -1,7 +1,9 @@
 package com.poc.ms_wallet_digital.controllers;
 
 import com.poc.ms_wallet_digital.advices.GlobalExceptionHandler;
-import com.poc.ms_wallet_digital.controllers.requests.*;
+import com.poc.ms_wallet_digital.controllers.requests.CounterpartyRequestDTO;
+import com.poc.ms_wallet_digital.controllers.requests.TransactionRequestDTO;
+import com.poc.ms_wallet_digital.controllers.requests.WalletCreateRequestDTO;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -129,7 +131,7 @@ class WalletsControllerTest {
     @Test
     @DisplayName("Deve depositar fundos com sucesso retornando 201 CREATED")
     void testDepositFundsSuccess() throws Exception {
-        DepositRequestDTO request = new DepositRequestDTO("DEPOSIT-001", new BigDecimal("200.00"), new ToRequest(TEST_WALLET_ID));
+        var request = new TransactionRequestDTO("DEPOSIT-001", new BigDecimal("200.00"), new CounterpartyRequestDTO(TEST_WALLET_ID));
 
         mockMvc.perform(post(BASE_URL + "/" + TEST_WALLET_ID + "/deposit")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -150,7 +152,7 @@ class WalletsControllerTest {
     @Test
     @DisplayName("Deve retornar erro 400 ao depositar com walletId inválido")
     void testDepositFundsWithInvalidWalletId() throws Exception {
-        DepositRequestDTO request = new DepositRequestDTO("DEPOSIT-001", new BigDecimal("200.00"), new ToRequest(TEST_WALLET_ID));
+        var request = new TransactionRequestDTO("DEPOSIT-001", new BigDecimal("200.00"), new CounterpartyRequestDTO(TEST_WALLET_ID));
 
         mockMvc.perform(post(BASE_URL + "/invalid-uuid/deposit")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -161,7 +163,7 @@ class WalletsControllerTest {
     @Test
     @DisplayName("Deve sacar fundos com sucesso retornando 201 CREATED")
     void testWithdrawFundsSuccess() throws Exception {
-        WithdrawRequestDTO request = new WithdrawRequestDTO("WITHDRAW-001", new FromRequest(TEST_WALLET_ID, new BigDecimal("50.00")));
+        var request = new TransactionRequestDTO("WITHDRAW-001", new BigDecimal("200.00"), new CounterpartyRequestDTO(TEST_WALLET_ID));
 
         mockMvc.perform(post(BASE_URL + "/" + TEST_WALLET_ID + "/withdraw")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -182,8 +184,8 @@ class WalletsControllerTest {
     @Test
     @DisplayName("Deve retornar erro 400 ao sacar com walletId inválido")
     void testWithdrawFundsWithInvalidWalletId() throws Exception {
-        WithdrawRequestDTO request = new WithdrawRequestDTO(
-                "WITHDRAW-001", new FromRequest(TEST_WALLET_ID, new BigDecimal("50.00")));
+        var request = new TransactionRequestDTO(
+                "WITHDRAW-001", new BigDecimal("200.00"), new CounterpartyRequestDTO(TEST_WALLET_ID));
 
         mockMvc.perform(post(BASE_URL + "/invalid-uuid/withdraw")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -195,8 +197,8 @@ class WalletsControllerTest {
     @DisplayName("Deve transferir saldo entre carteiras com sucesso retornando 201 CREATED")
     void testTransferBalanceSuccess() throws Exception {
         UUID toWalletId = UUID.randomUUID();
-        ToRequest toRequest = new ToRequest(toWalletId);
-        TransferRequestDTO request = new TransferRequestDTO(
+        var toRequest = new CounterpartyRequestDTO(toWalletId);
+        TransactionRequestDTO request = new TransactionRequestDTO(
                 "TRANSFER-001", new BigDecimal("100.00"), toRequest);
 
         mockMvc.perform(post(BASE_URL + "/" + TEST_WALLET_ID + "/transfer")
@@ -219,8 +221,8 @@ class WalletsControllerTest {
     @DisplayName("Deve retornar erro 400 ao transferir com walletId inválido")
     void testTransferBalanceWithInvalidWalletId() throws Exception {
         UUID toWalletId = UUID.randomUUID();
-        ToRequest toRequest = new ToRequest(toWalletId);
-        TransferRequestDTO request = new TransferRequestDTO(
+        var toRequest = new CounterpartyRequestDTO(toWalletId);
+        TransactionRequestDTO request = new TransactionRequestDTO(
                 "TRANSFER-001", new BigDecimal("100.00"), toRequest);
 
         mockMvc.perform(post(BASE_URL + "/invalid-uuid/transfer")
@@ -241,7 +243,7 @@ class WalletsControllerTest {
     @Test
     @DisplayName("Deve retornar 404 para rota inexistente")
     void testNotFoundForInvalidRoute() throws Exception {
-        mockMvc.perform(get( "/invalid-route"))
+        mockMvc.perform(get("/invalid-route"))
                 .andExpect(status().isNotFound());
     }
 

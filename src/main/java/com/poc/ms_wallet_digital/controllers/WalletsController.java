@@ -1,12 +1,11 @@
 package com.poc.ms_wallet_digital.controllers;
 
 import com.poc.ms_wallet_digital.configs.logging.TraceContext;
-import com.poc.ms_wallet_digital.controllers.requests.DepositRequestDTO;
-import com.poc.ms_wallet_digital.controllers.requests.TransferRequestDTO;
+import com.poc.ms_wallet_digital.controllers.requests.TransactionRequestDTO;
 import com.poc.ms_wallet_digital.controllers.requests.WalletCreateRequestDTO;
-import com.poc.ms_wallet_digital.controllers.requests.WithdrawRequestDTO;
 import com.poc.ms_wallet_digital.controllers.responses.*;
 import com.poc.ms_wallet_digital.enums.StatusEnum;
+import com.poc.ms_wallet_digital.enums.TransactionTypeEnum;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -46,8 +45,8 @@ public class WalletsController {
     @PostMapping
     public ResponseEntity<DataResponse<WalletResponseDTO>> createWallet(@RequestBody @NotNull WalletCreateRequestDTO request) {
 
-        TraceContext.enrich(request.getClientId(), request.getAccountId(), null);
-        log.info("Creating wallet for clientId: {} and accountId: {}", request.getClientId(), request.getAccountId());
+        TraceContext.enrich(request.clientId(), request.accountId(), null);
+        log.info("Creating wallet for clientId: {} and accountId: {}", request.clientId(), request.accountId());
 
         // Logica Verifica se existe na base sql a carteira para o cliente e conta, caso contrário, cria a carteira principal automaticamente
 
@@ -69,7 +68,8 @@ public class WalletsController {
         // retorna lista vazia com not found, caso contrário, retorna a lista de carteiras do cliente e conta
 
         WalletListResponseDTO list = new WalletListResponseDTO(
-                List.of(new WalletResponseDTO(UUID.randomUUID(), "Wallet 1"))
+                List.of(new WalletResponseDTO(
+                        UUID.randomUUID(), "Wallet", accountId, clientId))
         );
 
         return ResponseEntity.ok(DataResponse.of(list));
@@ -96,11 +96,14 @@ public class WalletsController {
     @PostMapping("/{walletId}/transfer")
     public ResponseEntity<DataResponse<TransactionResponseDTO>> transferBalance(
             @PathVariable UUID walletId,
-            @RequestBody @NotNull TransferRequestDTO request) {
+            @RequestBody @NotNull TransactionRequestDTO request) {
+
+        request.setType(request.getType() == null ? TransactionTypeEnum.TRANSFER : request.getType());
+        request.setId(walletId);
 
         TraceContext.enrichWallet(walletId);
         log.info("Starting transfer from walletId: {} to walletId: {} with amount: {}",
-                walletId, request.getTo().getId(), request.getAmount());
+                walletId, request.getCounterparty().id(), request.getAmount());
 
         // Verifica se existe na base sql a carteira para o walletId, caso nao existir, retorna not found,
         // caso contrário, verifica se a carteira de destino existe, caso nao existir, retorna not found
@@ -117,10 +120,14 @@ public class WalletsController {
     @PostMapping("/{walletId}/deposit")
     public ResponseEntity<DataResponse<TransactionResponseDTO>> depositFunds(
             @PathVariable UUID walletId,
-            @RequestBody @NotNull DepositRequestDTO request) {
+            @RequestBody @NotNull TransactionRequestDTO request) {
+
+        request.setType(request.getType() == null ? TransactionTypeEnum.DEPOSIT : request.getType());
+        request.setId(walletId);
 
         TraceContext.enrichWallet(walletId);
         log.info("Starting deposit to walletId: {} with amount: {}", walletId, request.getAmount());
+        ;
 
         // Verifica se existe na base sql a carteira para o walletId, caso nao existir, retorna not found,
         // caso contrario, consulta em contas a conta de origem do depósito, caso nao existir, retorna not found
@@ -134,13 +141,16 @@ public class WalletsController {
                                 StatusEnum.COMPLETED)));
     }
 
-    @PostMapping("/{accountId}/withdraw")
+    @PostMapping("/{walletId}/withdraw")
     public ResponseEntity<DataResponse<TransactionResponseDTO>> withdrawFunds(
-            @PathVariable UUID accountId,
-            @RequestBody @NotNull WithdrawRequestDTO request) {
+            @PathVariable UUID walletId,
+            @RequestBody @NotNull TransactionRequestDTO request) {
 
-        TraceContext.enrichWallet(accountId);
-        log.info("Starting withdrawal from walletId: {} with amount: {}", accountId, request.getFrom().getAmount());
+        request.setType(request.getType() == null ? TransactionTypeEnum.WITHDRAW : request.getType());
+        request.setId(walletId);
+
+        TraceContext.enrichWallet(walletId);
+        log.info("Starting withdrawal from walletId: {} with amount: {}", walletId, request.getAmount());
 
         // Verifica se existe na base sql a carteira para o walletId, caso nao existir, retorna not found,
         // caso contrário, consulta em contas a conta de destino do saque, caso nao existir, retorna not found

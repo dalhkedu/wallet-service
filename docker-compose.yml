@@ -70,6 +70,8 @@ services:
     depends_on:
       postgres-db:
         condition: service_healthy
+      rabbitmq:
+        condition: service_started
     environment:
       - SPRING_PROFILES_ACTIVE=local
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/db_wallet_digital
@@ -77,6 +79,18 @@ services:
       - SPRING_DATASOURCE_PASSWORD=secure_password
       - EKS_POD_NAME=ms-wallet-digital-local-pod
       - EKS_NAMESPACE=finance
+    networks:
+      - eks-local-network
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=admin
     networks:
       - eks-local-network
 

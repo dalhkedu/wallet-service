@@ -5,20 +5,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import java.math.BigDecimal;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class WalletBalanceResponseDTO {
+public record WalletBalanceResponseDTO(
 
-    private String name;
-    private BigDecimal amount;
+        String name,
+        BigDecimal amount
 
-    public WalletBalanceResponseDTO(String name, BigDecimal amount) {
-        this.name = name;
-        this.amount = amount;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;    }
+) {
 }

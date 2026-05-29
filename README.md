@@ -1,6 +1,24 @@
 # Architectural Design Record & Software Development Plan: `ms-wallet-digital`
 
 ---
+Grafana
+http://localhost:3000/login
+adin / admin
+
+Sonacube
+http://localhost:9000/
+admin / admin
+
+Prometheus
+http://localhost:9090/
+
+RabbitMq
+http://localhost:15672
+admin / admin
+
+
+http://localhost:8080/swagger-ui/index.html
+
 
 ## 1. Executive Summary & Quality Framework Alignment
 
@@ -224,7 +242,7 @@ Retrieves balance information for a specific wallet. It supports a time travel p
 
 ```
 
-### POST `/wallet`
+### POST `/wallets`
 
 Initializes a single wallet structure with a baseline balance of zero.
 
@@ -239,7 +257,7 @@ Initializes a single wallet structure with a baseline balance of zero.
 
 ```
 
-### POST `/wallet/{walletId}/balance`
+### POST `/wallets/{walletId}/transfer`
 
 Direct synchronous bypass used by the orchestrator engine during a fallback event.
 
@@ -248,15 +266,118 @@ Direct synchronous bypass used by the orchestrator engine during a fallback even
 ```json
 {
   "transferId": "tx_77665544",
-  "from": {
-    "walletId": "wlt_0j1k2l3m4n5o",
-    "balance": 250.00
-  },
-  "to": {
-    "walletId": "wlt_91a0b3c2-d4e5"
+  "amount": 250.00,
+  "counterparty": {
+    "id": "wlt_91a0b3c2-d4e5"
   }
 }
+```
 
+* **Response Body Payload:**
+
+```json
+{
+  "data": {
+    "transferId": "tx_77665544",
+    "status" "COMPLETED"
+  }
+}
+```
+
+* **Assync** `/transfer`
+
+```json
+{
+  "transferId": "tx_77665544",
+  "id": "wlt_91a0b3c2-d4e5",
+  "type": "TRANSFER", 
+  "amount": 250.00,
+  "counterparty": {
+    "id": "wlt_91a0b3c2-d4e5"
+  }
+}
+```
+
+### POST `/wallets/{accountId}/deposit`
+
+Direct synchronous bypass used by the orchestrator engine during a fallback event.
+
+* **Request Body Payload:**
+
+```json
+{
+  "transferId": "tx_77665544",
+  "amount": 250.00,
+  "counterparty": {
+    "id": "wlt_91a0b3c2-d4e5"
+  }
+}
+```
+
+* **Response Body Payload:**
+
+```json
+{
+  "data": {
+    "transferId": "tx_77665544",
+    "status" "COMPLETED"
+  }
+}
+```
+
+* **Assync** `/deposit`
+
+```json
+{
+  "transferId": "tx_77665544",
+  "id": "wlt_91a0b3c2-d4e5",
+  "type": "DEPOSIT", 
+  "amount": 250.00,
+  "counterparty": {
+    "id": "wlt_91a0b3c2-d4e5"
+  }
+}
+```
+
+### POST `/wallets/{walletId}/withdraw`
+
+Direct synchronous bypass used by the orchestrator engine during a fallback event.
+
+* **Request Body Payload:**
+
+```json
+{
+  "transferId": "tx_77665544",
+  "amount": 250.00,
+  "counterparty": {
+    "id": "wlt_91a0b3c2-d4e5"
+  }
+}
+```
+
+* **Response Body Payload:**
+
+```json
+{
+  "data": {
+    "transferId": "tx_77665544",
+    "status" "COMPLETED"
+  }
+}
+```
+
+* **Assync** `/withdraw`
+
+```json
+{
+  "transferId": "tx_77665544",
+  "id": "wlt_91a0b3c2-d4e5",
+  "type": "WITHDRAW", 
+  "amount": 250.00,
+  "counterparty": {
+    "id": "wlt_91a0b3c2-d4e5"
+  }
+}
 ```
 
 ---
@@ -271,13 +392,17 @@ To ensure audit compliance and visibility, every operational log must output in 
 
 ```json
 {
-  "timestamp": "2026-05-27T18:07:49.000Z",
-  "log_level": "INFO",
-  "correlation_id": "corr_bf889c22-e19a-4712",
-  "flow": "p2p_wallet_transfer_v1",
-  "client_id": "cli_33445566",
-  "account_id": "acc_88772211",
-  "message": "Financial atomic transfer successfully committed within SQL ledger boundary."
+  "@timestamp": "2026-05-29T15:21:00.123Z",
+  "log.level": "INFO",
+  "message": "Consultando saldo atual do livro-razão",
+  "service.name": "ms-wallet-digital",
+  "process.thread.name": "http-nio-8080-exec-1",
+  "log.logger": "com.poc.controller.WalletsController",
+  "labels": {
+    "correlation_id": "bf889c22-e19a-4712-8877-221133445566",
+    "flow": "wallet_query_v1",
+    "wallet_id": "a3b2c1d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d"
+  }
 }
 
 ```
