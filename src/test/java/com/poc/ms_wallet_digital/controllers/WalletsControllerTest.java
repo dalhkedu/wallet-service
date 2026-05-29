@@ -31,11 +31,10 @@ class WalletsControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    // ==================== UC01: Criar Carteira ====================
     @Test
     @DisplayName("Deve criar uma carteira com sucesso retornando 201 CREATED")
     void testCreateWalletSuccess() throws Exception {
-        WalletCreateRequestDTO request = new WalletCreateRequestDTO();
+        WalletCreateRequestDTO request = new WalletCreateRequestDTO(TEST_CLIENT_ID, TEST_ACCOUNT_ID);
 
         mockMvc.perform(post(BASE_URL)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -54,7 +53,6 @@ class WalletsControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
-    // ==================== UC02: Consultar Carteiras por Cliente ====================
     @Test
     @DisplayName("Deve retornar lista de carteiras com sucesso retornando 200 OK")
     void testGetWalletsByClientSuccess() throws Exception {
@@ -95,7 +93,6 @@ class WalletsControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
-    // ==================== UC03: Consultar Saldo ====================
     @Test
     @DisplayName("Deve retornar saldo atual da carteira retornando 200 OK")
     void testGetWalletBalanceSuccess() throws Exception {
@@ -105,7 +102,7 @@ class WalletsControllerTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.data").exists())
                 .andExpect(jsonPath("$.data.name", is("Main Wallet")))
-                .andExpect(jsonPath("$.data.balance", is(1500.50)));
+                .andExpect(jsonPath("$.data.amount", is(1500.50)));
     }
 
     @Test
@@ -132,7 +129,7 @@ class WalletsControllerTest {
     @Test
     @DisplayName("Deve depositar fundos com sucesso retornando 201 CREATED")
     void testDepositFundsSuccess() throws Exception {
-        DepositRequestDTO request = new DepositRequestDTO();
+        DepositRequestDTO request = new DepositRequestDTO("DEPOSIT-001", new BigDecimal("200.00"), new ToRequest(TEST_WALLET_ID));
 
         mockMvc.perform(post(BASE_URL + "/" + TEST_WALLET_ID + "/deposit")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -153,7 +150,7 @@ class WalletsControllerTest {
     @Test
     @DisplayName("Deve retornar erro 400 ao depositar com walletId inválido")
     void testDepositFundsWithInvalidWalletId() throws Exception {
-        DepositRequestDTO request = new DepositRequestDTO();
+        DepositRequestDTO request = new DepositRequestDTO("DEPOSIT-001", new BigDecimal("200.00"), new ToRequest(TEST_WALLET_ID));
 
         mockMvc.perform(post(BASE_URL + "/invalid-uuid/deposit")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -164,7 +161,7 @@ class WalletsControllerTest {
     @Test
     @DisplayName("Deve sacar fundos com sucesso retornando 201 CREATED")
     void testWithdrawFundsSuccess() throws Exception {
-        WithdrawRequestDTO request = new WithdrawRequestDTO();
+        WithdrawRequestDTO request = new WithdrawRequestDTO("WITHDRAW-001", new FromRequest(TEST_WALLET_ID, new BigDecimal("50.00")));
 
         mockMvc.perform(post(BASE_URL + "/" + TEST_WALLET_ID + "/withdraw")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -185,7 +182,8 @@ class WalletsControllerTest {
     @Test
     @DisplayName("Deve retornar erro 400 ao sacar com walletId inválido")
     void testWithdrawFundsWithInvalidWalletId() throws Exception {
-        WithdrawRequestDTO request = new WithdrawRequestDTO();
+        WithdrawRequestDTO request = new WithdrawRequestDTO(
+                "WITHDRAW-001", new FromRequest(TEST_WALLET_ID, new BigDecimal("50.00")));
 
         mockMvc.perform(post(BASE_URL + "/invalid-uuid/withdraw")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -193,14 +191,13 @@ class WalletsControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
-    // ==================== UC08: Transferência entre Carteiras ====================
     @Test
     @DisplayName("Deve transferir saldo entre carteiras com sucesso retornando 201 CREATED")
     void testTransferBalanceSuccess() throws Exception {
         UUID toWalletId = UUID.randomUUID();
-        FromRequest fromRequest = new FromRequest(TEST_WALLET_ID, new BigDecimal("100.00"));
         ToRequest toRequest = new ToRequest(toWalletId);
-        TransferRequestDTO request = new TransferRequestDTO("TRANSFER-001", fromRequest, toRequest);
+        TransferRequestDTO request = new TransferRequestDTO(
+                "TRANSFER-001", new BigDecimal("100.00"), toRequest);
 
         mockMvc.perform(post(BASE_URL + "/" + TEST_WALLET_ID + "/transfer")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -222,9 +219,9 @@ class WalletsControllerTest {
     @DisplayName("Deve retornar erro 400 ao transferir com walletId inválido")
     void testTransferBalanceWithInvalidWalletId() throws Exception {
         UUID toWalletId = UUID.randomUUID();
-        FromRequest fromRequest = new FromRequest(TEST_WALLET_ID, new BigDecimal("100.00"));
         ToRequest toRequest = new ToRequest(toWalletId);
-        TransferRequestDTO request = new TransferRequestDTO("TRANSFER-001", fromRequest, toRequest);
+        TransferRequestDTO request = new TransferRequestDTO(
+                "TRANSFER-001", new BigDecimal("100.00"), toRequest);
 
         mockMvc.perform(post(BASE_URL + "/invalid-uuid/transfer")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -232,7 +229,6 @@ class WalletsControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
-    // ==================== Testes de URLMapping ====================
     @Test
     @DisplayName("Deve ter a rota base correta /wallets")
     void testBaseURLMapping() throws Exception {

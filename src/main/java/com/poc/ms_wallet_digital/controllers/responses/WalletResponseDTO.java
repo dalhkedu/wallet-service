@@ -1,12 +1,20 @@
 package com.poc.ms_wallet_digital.controllers.responses;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.UUID;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class WalletResponseDTO {
     private UUID id;
     private String name;
     private UUID accountId;
     private UUID clientId;
+
+    public WalletResponseDTO(UUID id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public WalletResponseDTO(UUID id, String name, UUID accountId, UUID clientId) {
         this.id = id;

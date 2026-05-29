@@ -6,4 +6,11 @@ public class WalletListResponseDTO {
 
     private List<WalletResponseDTO> listWallet;
 
+    public WalletListResponseDTO(List<WalletResponseDTO> listWallet) {
+        this.listWallet = listWallet;
+    }
+
+    public List<WalletResponseDTO> getListWallet() {
+        return listWallet;
+    }
 }

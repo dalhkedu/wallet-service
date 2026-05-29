@@ -1,22 +1,24 @@
 package com.poc.ms_wallet_digital.controllers.responses;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.math.BigDecimal;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class WalletBalanceResponseDTO {
 
     private String name;
-    private BigDecimal balance;
+    private BigDecimal amount;
 
-    public WalletBalanceResponseDTO(String name, BigDecimal balance) {
+    public WalletBalanceResponseDTO(String name, BigDecimal amount) {
         this.name = name;
-        this.balance = balance;
+        this.amount = amount;
     }
 
     public String getName() {
         return name;
     }
 
-    public BigDecimal getBalance() {
-        return balance;
-    }
+    public BigDecimal getAmount() {
+        return amount;    }
 }

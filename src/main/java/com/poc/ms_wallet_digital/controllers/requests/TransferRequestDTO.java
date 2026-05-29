@@ -1,14 +1,26 @@
 package com.poc.ms_wallet_digital.controllers.requests;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+
+import java.math.BigDecimal;
+
 public class TransferRequestDTO {
 
+    @NotBlank(message = "The 'id account or wallets' field is required and cannot be blank.")
     private String transferId;
-    private FromRequest from;
+
+    @NotEmpty(message = "The 'amount' field is required and cannot be blank.")
+    @Min(value = 0, message = "The 'amount' field must be a positive value.")
+    private BigDecimal amount;
+
+    @NotEmpty(message = "The 'to' field is required and cannot be empty.")
     private ToRequest to;
 
-    public TransferRequestDTO(String transferId, FromRequest from, ToRequest to) {
+    public TransferRequestDTO(String transferId, BigDecimal amount, ToRequest to) {
         this.transferId = transferId;
-        this.from = from;
+        this.amount = amount;
         this.to = to;
     }
 
@@ -16,8 +28,8 @@ public class TransferRequestDTO {
         return transferId;
     }
 
-    public FromRequest getFrom() {
-        return from;
+    public BigDecimal getAmount() {
+        return amount;
     }
 
     public ToRequest getTo() {
