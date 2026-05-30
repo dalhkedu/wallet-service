@@ -1,0 +1,1524 @@
+<mxfile host="Electron" pages="7">
+  <diagram id="f7XnwQn9cCtMgbeKofV5" name="SOLUÇÃO">
+    <mxGraphModel dx="2175" dy="1294" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-1" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);verticalAlign=top;" value="Fronteira de Outros Times" vertex="1">
+          <mxGeometry height="158" width="820" x="120" y="727.44" as="geometry" />
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-2" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);verticalAlign=top;" value="Core Wallet Service" vertex="1">
+          <mxGeometry height="339.06" width="387" x="1124" y="640.94" as="geometry" />
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-3" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);verticalAlign=top;" value="Mensageria Assíncrona" vertex="1">
+          <mxGeometry height="773" width="466" x="1720" y="227" as="geometry" />
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-4" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);verticalAlign=top;" value="Orquestração &amp; Resiliência" vertex="1">
+          <mxGeometry height="373" width="670" x="906" y="145" as="geometry" />
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-5" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="BFF / Canais Digitais" vertex="1">
+          <mxGeometry height="54" width="208" x="1238" y="27" as="geometry" />
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-31" edge="1" parent="1" source="E3V3-5s8RFXfizDJ6rtN-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="E3V3-5s8RFXfizDJ6rtN-30">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-32" connectable="0" parent="E3V3-5s8RFXfizDJ6rtN-31" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="3c. Consulta dados pessoais" vertex="1">
+          <mxGeometry relative="1" x="0.125" y="1" as="geometry">
+            <mxPoint x="31" y="-5" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-6" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Orquestrador de Transações" vertex="1">
+          <mxGeometry height="54" width="259" x="1213" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-7" parent="1" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=10;strokeWidth=2;whiteSpace=wrap;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Amazon DynamoDB&#xa;Idempotência e Estados" vertex="1">
+          <mxGeometry height="108" width="185" x="1090" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-8" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="wallet-transaction-requests-topic" vertex="1">
+          <mxGeometry height="78" width="260" x="1755" y="302" as="geometry" />
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-9" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="wallet-ms-transfer-commands-queue" vertex="1">
+          <mxGeometry height="78" width="260" x="1755" y="518" as="geometry" />
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-10" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="wallet-transaction-results-topic" vertex="1">
+          <mxGeometry height="78" width="260" x="1767" y="703" as="geometry" />
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-11" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="orchestrator-wallet-callback-queue" vertex="1">
+          <mxGeometry height="78" width="260" x="1907" y="903" as="geometry" />
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-12" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="MS Carteira Digital&#xa;Java / REST API" vertex="1">
+          <mxGeometry height="78" width="194" x="1221" y="703" as="geometry" />
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-13" parent="1" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=10;strokeWidth=2;whiteSpace=wrap;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Banco de Dados SQL&#xa;Saldos e Histórico" vertex="1">
+          <mxGeometry height="105" width="159" x="1238" y="860" as="geometry" />
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-14" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="MS Gestão de Contas" vertex="1">
+          <mxGeometry height="54" width="209" x="320" y="779.44" as="geometry" />
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-15" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="MS Antifraude" vertex="1">
+          <mxGeometry height="54" width="159" x="560" y="779.44" as="geometry" />
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-16" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="MS Notificações" vertex="1">
+          <mxGeometry height="54" width="172" x="755" y="779.44" as="geometry" />
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-17" edge="1" parent="1" source="E3V3-5s8RFXfizDJ6rtN-5" style="startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;edgeStyle=orthogonalEdgeStyle;" target="E3V3-5s8RFXfizDJ6rtN-6" value="1. Requisições HTTP">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-18" edge="1" parent="1" source="E3V3-5s8RFXfizDJ6rtN-6" style="startArrow=block;endArrow=block;exitX=0.25;exitY=1;entryX=0.5;entryY=0;rounded=0;edgeStyle=orthogonalEdgeStyle;exitDx=0;exitDy=0;" target="E3V3-5s8RFXfizDJ6rtN-7" value="2. Valida chave uuidv5_timestamp">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-19" edge="1" parent="1" source="E3V3-5s8RFXfizDJ6rtN-6" style="startArrow=none;endArrow=block;entryX=0.5;entryY=0;rounded=0;edgeStyle=orthogonalEdgeStyle;entryDx=0;entryDy=0;exitX=0;exitY=0.75;exitDx=0;exitDy=0;" target="E3V3-5s8RFXfizDJ6rtN-15" value="3a. Análise de Risco">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1210" y="207" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-20" edge="1" parent="1" source="E3V3-5s8RFXfizDJ6rtN-6" style="startArrow=block;endArrow=block;exitX=0;exitY=0.5;entryX=0.5;entryY=0;rounded=0;edgeStyle=orthogonalEdgeStyle;entryDx=0;entryDy=0;exitDx=0;exitDy=0;" target="E3V3-5s8RFXfizDJ6rtN-14" value="3b. Movimentação em Conta Corrente">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-21" edge="1" parent="1" source="E3V3-5s8RFXfizDJ6rtN-6" style="startArrow=none;endArrow=block;exitX=0.5;exitY=1;rounded=0;edgeStyle=orthogonalEdgeStyle;exitDx=0;exitDy=0;" target="E3V3-5s8RFXfizDJ6rtN-8" value="4. Publica Comando">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-22" edge="1" parent="1" source="E3V3-5s8RFXfizDJ6rtN-8" style="dashed=1;dashPattern=2 3;startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;edgeStyle=orthogonalEdgeStyle;" target="E3V3-5s8RFXfizDJ6rtN-9" value="Roteamento">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-23" edge="1" parent="1" source="E3V3-5s8RFXfizDJ6rtN-9" style="startArrow=none;endArrow=block;exitX=0.5;exitY=1;entryX=0.75;entryY=0;rounded=0;edgeStyle=orthogonalEdgeStyle;entryDx=0;entryDy=0;" target="E3V3-5s8RFXfizDJ6rtN-12" value="5. Consome Comando">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1885" y="670" />
+              <mxPoint x="1367" y="670" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-24" edge="1" parent="1" source="E3V3-5s8RFXfizDJ6rtN-12" style="startArrow=block;endArrow=block;exitX=0.5;exitY=1;entryX=0.5;entryY=0;rounded=0;edgeStyle=orthogonalEdgeStyle;exitDx=0;exitDy=0;" target="E3V3-5s8RFXfizDJ6rtN-13" value="6. Persistência ACID / Livro-Razão">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-25" edge="1" parent="1" source="E3V3-5s8RFXfizDJ6rtN-12" style="startArrow=none;endArrow=block;exitX=1;exitY=0.5;entryX=0;entryY=0.5;rounded=0;edgeStyle=orthogonalEdgeStyle;exitDx=0;exitDy=0;entryDx=0;entryDy=0;" target="E3V3-5s8RFXfizDJ6rtN-10" value="7. Publica Resultado">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-26" edge="1" parent="1" source="E3V3-5s8RFXfizDJ6rtN-10" style="dashed=1;dashPattern=2 3;startArrow=none;endArrow=block;exitX=0.75;exitY=1;entryX=0.5;entryY=0;rounded=0;edgeStyle=orthogonalEdgeStyle;entryDx=0;entryDy=0;exitDx=0;exitDy=0;" target="E3V3-5s8RFXfizDJ6rtN-11" value="Roteamento">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-27" edge="1" parent="1" source="E3V3-5s8RFXfizDJ6rtN-11" style="startArrow=none;endArrow=block;exitX=0.75;exitY=0;entryX=1;entryY=0.5;rounded=0;edgeStyle=orthogonalEdgeStyle;entryDx=0;entryDy=0;exitDx=0;exitDy=0;" target="E3V3-5s8RFXfizDJ6rtN-6" value="8. Consome Callback">
+          <mxGeometry relative="1" x="-0.0905" y="2" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-28" edge="1" parent="1" source="E3V3-5s8RFXfizDJ6rtN-6" style="dashed=1;dashPattern=2 3;startArrow=none;endArrow=block;exitX=0.402;exitY=1.009;entryX=0.5;entryY=0;rounded=0;edgeStyle=orthogonalEdgeStyle;exitDx=0;exitDy=0;exitPerimeter=0;" target="E3V3-5s8RFXfizDJ6rtN-12" value="9. Contingência Síncrona /tranfer /deposit /withdraw">
+          <mxGeometry relative="1" x="0.3908" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-29" edge="1" parent="1" source="E3V3-5s8RFXfizDJ6rtN-6" style="startArrow=none;endArrow=block;exitX=0.104;exitY=1.013;entryX=0.5;entryY=0;rounded=0;edgeStyle=orthogonalEdgeStyle;entryDx=0;entryDy=0;exitDx=0;exitDy=0;exitPerimeter=0;" target="E3V3-5s8RFXfizDJ6rtN-16" value="10. Notifica Sucesso/Falha">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1240" y="280" />
+              <mxPoint x="841" y="280" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="E3V3-5s8RFXfizDJ6rtN-30" parent="1" style="whiteSpace=wrap;strokeWidth=2;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="MS Consumer" vertex="1">
+          <mxGeometry height="54" width="159" x="130" y="779.44" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="UuivndyLF6GGOILiXvWS" name="USECASE1">
+    <mxGraphModel dx="2828" dy="1682" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="lksGvQcEkrMuZ682soT7-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" value="Create Wallet" vertex="1">
+          <mxGeometry height="1210" width="1307.5" x="120" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-2" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};participant=umlActor;verticalAlign=bottom;labelPosition=center;verticalLabelPosition=top;align=center;size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="BFF / Canal" vertex="1">
+          <mxGeometry height="1128" width="35" x="207.5" y="610" as="geometry" />
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-3" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Orquestrador (DynamoDB)" vertex="1">
+          <mxGeometry height="1128" width="209" x="539.5" y="610" as="geometry" />
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-4" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="MS Carteira Digital (SQL)" vertex="1">
+          <mxGeometry height="1128" width="195" x="873.5" y="610" as="geometry" />
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-5" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Times Externos (Contas/Fraude)" vertex="1">
+          <mxGeometry height="1128" width="243" x="1118.5" y="610" as="geometry" />
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-6" parent="1" style="shape=umlFrame;dashed=1;pointerEvents=0;dropTarget=0;strokeColor=#B3B3B3;height=51;width=126;fillColor=light-dark(#eeeeee,#1f2020);fontColor=light-dark(#333333,#cccccc);" value="REGISTRO" vertex="1">
+          <mxGeometry height="614" width="842" x="271.5" y="1029" as="geometry" />
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-7" parent="lksGvQcEkrMuZ682soT7-6" style="text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" value="[Carteira já existe]" vertex="1">
+          <mxGeometry height="20" width="812" x="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-8" parent="lksGvQcEkrMuZ682soT7-6" style="shape=line;dashed=1;whiteSpace=wrap;verticalAlign=top;labelPosition=center;verticalLabelPosition=middle;align=center;strokeColor=#B3B3B3;" value="[Conta Elegível]" vertex="1">
+          <mxGeometry height="4" width="842" y="237" as="geometry" />
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-9" edge="1" parent="1" source="lksGvQcEkrMuZ682soT7-2" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="lksGvQcEkrMuZ682soT7-3" value="POST /wallet (Payload + Correlation ID)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="471.5" y="717" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-10" parent="lksGvQcEkrMuZ682soT7-9" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="1" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-188" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-11" edge="1" parent="1" source="lksGvQcEkrMuZ682soT7-3" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="lksGvQcEkrMuZ682soT7-5" value="Valida se Conta existe e se Cliente é idôneo (Antifraude)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="950.5" y="837" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-12" parent="lksGvQcEkrMuZ682soT7-11" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="2" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-305.5" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-13" edge="1" parent="1" source="lksGvQcEkrMuZ682soT7-5" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="lksGvQcEkrMuZ682soT7-3" value="Validação OK">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="953.5" y="889" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-14" parent="lksGvQcEkrMuZ682soT7-13" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="3" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="291.5" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-15" edge="1" parent="1" source="lksGvQcEkrMuZ682soT7-3" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="lksGvQcEkrMuZ682soT7-4" value="POST /wallet (Encaminha requisição)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="815.5" y="941" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-16" parent="lksGvQcEkrMuZ682soT7-15" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="4" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-171" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-17" edge="1" parent="1" source="lksGvQcEkrMuZ682soT7-4" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="lksGvQcEkrMuZ682soT7-3" value="Retorna Erro (400 Bad Request)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="818.5" y="1107" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-18" parent="lksGvQcEkrMuZ682soT7-17" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="5" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="157" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-19" edge="1" parent="1" source="lksGvQcEkrMuZ682soT7-3" style="curved=1;endArrow=block;rounded=0;" target="lksGvQcEkrMuZ682soT7-3" value="Atualiza DynamoDB (Falhou)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="694.5" y="1159" />
+              <mxPoint x="694.5" y="1189" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-20" parent="lksGvQcEkrMuZ682soT7-19" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="6" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-57" y="-22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-21" edge="1" parent="1" source="lksGvQcEkrMuZ682soT7-3" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="lksGvQcEkrMuZ682soT7-2" value="Retorna 400 Bad Request">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="474.5" y="1241" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-22" parent="lksGvQcEkrMuZ682soT7-21" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="7" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="174" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-23" edge="1" parent="1" source="lksGvQcEkrMuZ682soT7-4" style="curved=1;endArrow=block;rounded=0;" target="lksGvQcEkrMuZ682soT7-4" value="Insere registro com Saldo $0.00 (SQL)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1021.5" y="1339" />
+              <mxPoint x="1021.5" y="1369" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-24" parent="lksGvQcEkrMuZ682soT7-23" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="8" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-57" y="-22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-25" edge="1" parent="1" source="lksGvQcEkrMuZ682soT7-4" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="lksGvQcEkrMuZ682soT7-3" value="Retorna 201 Created (walletId)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="818.5" y="1421" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-26" parent="lksGvQcEkrMuZ682soT7-25" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="9" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="157" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-27" edge="1" parent="1" source="lksGvQcEkrMuZ682soT7-3" style="curved=1;endArrow=block;rounded=0;" target="lksGvQcEkrMuZ682soT7-3" value="Atualiza DynamoDB (Concluído)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="694.5" y="1473" />
+              <mxPoint x="694.5" y="1503" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-28" parent="lksGvQcEkrMuZ682soT7-27" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="10" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-57" y="-22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-29" edge="1" parent="1" source="lksGvQcEkrMuZ682soT7-3" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="lksGvQcEkrMuZ682soT7-2" value="Retorna 201 Created + Dados da Carteira">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="474.5" y="1623" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-30" parent="lksGvQcEkrMuZ682soT7-29" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="11" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="174" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-31" parent="1" style="fillColor=#ffff88;strokeColor=#9E916F;fontColor=light-dark(#333333,#000000);" value="Gera/Valida Idempotência&#xa;no DynamoDB" vertex="1">
+          <mxGeometry height="68" width="209" x="539.5" y="737" as="geometry" />
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-32" parent="1" style="fillColor=#ffff88;strokeColor=#9E916F;fontColor=#000000;" value="Valida se já existe carteira&#xa;para esta conta no SQL" vertex="1">
+          <mxGeometry height="68" width="201" x="870.5" y="961" as="geometry" />
+        </mxCell>
+        <mxCell id="lksGvQcEkrMuZ682soT7-33" parent="1" style="fillColor=#ffff88;strokeColor=#9E916F;fontColor=#000000;labelBackgroundColor=none;" value="Dispara evento assíncrono&#xa;para o Time de Notificação" vertex="1">
+          <mxGeometry height="68" width="210" x="538.5" y="1523" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="olmuxDtTUo1FibzOYuw2" name="USECASE2">
+    <mxGraphModel dx="1414" dy="841" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="NhPZnj_aCB4Oub4VTvyO-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;fontColor=light-dark(#000000,#FFFFFF);" value="&lt;span id=&quot;docs-internal-guid-eedb2f54-7fff-e2cd-1bdb-2fc6f6f6111d&quot;&gt;&lt;span style=&quot;font-size: 13pt; font-family: Arial, sans-serif; background-color: transparent; font-weight: 700; font-variant: normal; vertical-align: baseline; white-space: pre-wrap;&quot;&gt;Retrieve Balance&lt;/span&gt;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="1090" width="1690" x="140" y="500" as="geometry" />
+        </mxCell>
+        <mxCell id="NhPZnj_aCB4Oub4VTvyO-2" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};participant=umlActor;verticalAlign=bottom;labelPosition=center;verticalLabelPosition=top;align=center;size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="BFF / Canal" vertex="1">
+          <mxGeometry height="1002" width="35" x="220" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="NhPZnj_aCB4Oub4VTvyO-3" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Orquestrador" vertex="1">
+          <mxGeometry height="1002" width="150" x="670" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="NhPZnj_aCB4Oub4VTvyO-4" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="MS Carteira Digital" vertex="1">
+          <mxGeometry height="1002" width="152" x="1008" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="NhPZnj_aCB4Oub4VTvyO-5" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Banco de Dados SQL" vertex="1">
+          <mxGeometry height="1002" width="168" x="1581" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="NhPZnj_aCB4Oub4VTvyO-6" parent="1" style="shape=umlFrame;dashed=1;pointerEvents=0;dropTarget=0;strokeColor=#B3B3B3;height=63;width=166;fillColor=light-dark(#eeeeee,#1f2020);fontColor=light-dark(#333333,#cccccc);" value="REGISTRO" vertex="1">
+          <mxGeometry height="540" width="1392" x="284" y="927" as="geometry" />
+        </mxCell>
+        <mxCell id="NhPZnj_aCB4Oub4VTvyO-7" parent="NhPZnj_aCB4Oub4VTvyO-6" style="text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" value="[Carteira Encontrada]" vertex="1">
+          <mxGeometry height="20" width="1362" x="30" as="geometry" />
+        </mxCell>
+        <mxCell id="NhPZnj_aCB4Oub4VTvyO-8" parent="NhPZnj_aCB4Oub4VTvyO-6" style="shape=line;dashed=1;whiteSpace=wrap;verticalAlign=top;labelPosition=center;verticalLabelPosition=middle;align=center;strokeColor=#B3B3B3;" value="[Carteira Não Encontrada]" vertex="1">
+          <mxGeometry height="4" width="1392" y="275" as="geometry" />
+        </mxCell>
+        <mxCell id="NhPZnj_aCB4Oub4VTvyO-9" edge="1" parent="1" source="NhPZnj_aCB4Oub4VTvyO-2" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="NhPZnj_aCB4Oub4VTvyO-3" value="GET /wallets?clientId=X&amp;accountId=Y (Correlation ID)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="529" y="667" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NhPZnj_aCB4Oub4VTvyO-10" parent="NhPZnj_aCB4Oub4VTvyO-9" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="1" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-232.5" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NhPZnj_aCB4Oub4VTvyO-11" edge="1" parent="1" source="NhPZnj_aCB4Oub4VTvyO-3" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="NhPZnj_aCB4Oub4VTvyO-4" value="GET /wallets?clientId=X&amp;accountId=Y">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="923" y="787" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NhPZnj_aCB4Oub4VTvyO-12" parent="NhPZnj_aCB4Oub4VTvyO-11" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="2" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-177" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NhPZnj_aCB4Oub4VTvyO-13" edge="1" parent="1" source="NhPZnj_aCB4Oub4VTvyO-4" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="NhPZnj_aCB4Oub4VTvyO-5" value="SELECT id, name FROM wallets WHERE client_id = X AND account_id = Y">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1383" y="907" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NhPZnj_aCB4Oub4VTvyO-14" parent="NhPZnj_aCB4Oub4VTvyO-13" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="3" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-298" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NhPZnj_aCB4Oub4VTvyO-15" edge="1" parent="1" source="NhPZnj_aCB4Oub4VTvyO-5" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="NhPZnj_aCB4Oub4VTvyO-4" value="Retorna registro da carteira">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1386" y="1005" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NhPZnj_aCB4Oub4VTvyO-16" parent="NhPZnj_aCB4Oub4VTvyO-15" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="4" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="284" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NhPZnj_aCB4Oub4VTvyO-17" edge="1" parent="1" source="NhPZnj_aCB4Oub4VTvyO-4" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="NhPZnj_aCB4Oub4VTvyO-3" value="Retorna 200 OK (data: { wallets: [...] })">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="926" y="1125" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NhPZnj_aCB4Oub4VTvyO-18" parent="NhPZnj_aCB4Oub4VTvyO-17" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="5" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="163" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NhPZnj_aCB4Oub4VTvyO-19" edge="1" parent="1" source="NhPZnj_aCB4Oub4VTvyO-3" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="NhPZnj_aCB4Oub4VTvyO-2" value="Retorna 200 OK + Payload">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="532" y="1177" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NhPZnj_aCB4Oub4VTvyO-20" parent="NhPZnj_aCB4Oub4VTvyO-19" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="6" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="218.5" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NhPZnj_aCB4Oub4VTvyO-21" edge="1" parent="1" source="NhPZnj_aCB4Oub4VTvyO-5" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="NhPZnj_aCB4Oub4VTvyO-4" value="Retorna vazio">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1386" y="1275" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NhPZnj_aCB4Oub4VTvyO-22" parent="NhPZnj_aCB4Oub4VTvyO-21" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="7" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="284" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NhPZnj_aCB4Oub4VTvyO-23" edge="1" parent="1" source="NhPZnj_aCB4Oub4VTvyO-4" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="NhPZnj_aCB4Oub4VTvyO-3" value="Retorna 404 Not Found">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="926" y="1395" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NhPZnj_aCB4Oub4VTvyO-24" parent="NhPZnj_aCB4Oub4VTvyO-23" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="8" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="163" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NhPZnj_aCB4Oub4VTvyO-25" edge="1" parent="1" source="NhPZnj_aCB4Oub4VTvyO-3" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="NhPZnj_aCB4Oub4VTvyO-2" value="Retorna 404 Not Found">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="532" y="1447" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NhPZnj_aCB4Oub4VTvyO-26" parent="NhPZnj_aCB4Oub4VTvyO-25" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="9" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="218.5" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NhPZnj_aCB4Oub4VTvyO-27" parent="1" style="fillColor=#ffff88;strokeColor=#9E916F;fontColor=light-dark(#333333,#000000);" value="Roteia a requisição de leitura.&#xa;(Ignora DynamoDB - Sem alteração de estado)" vertex="1">
+          <mxGeometry height="68" width="348" x="571" y="687" as="geometry" />
+        </mxCell>
+        <mxCell id="NhPZnj_aCB4Oub4VTvyO-28" parent="1" style="fillColor=#ffff88;strokeColor=#9E916F;fontColor=light-dark(#333333,#000000);" value="Valida contrato (Flow: wallet_query)&#xa;Se faltar parâmetro -&gt; Retorna 400" vertex="1">
+          <mxGeometry height="68" width="270" x="949" y="807" as="geometry" />
+        </mxCell>
+        <mxCell id="NhPZnj_aCB4Oub4VTvyO-29" parent="1" style="fillColor=#ffff88;strokeColor=#9E916F;fontColor=light-dark(#333333,#000000);" value="Registra log INFO vinculando:&#xa;clientId, accountId, Correlação e Flow" vertex="1">
+          <mxGeometry height="68" width="283" x="943" y="1025" as="geometry" />
+        </mxCell>
+        <mxCell id="NhPZnj_aCB4Oub4VTvyO-30" parent="1" style="fillColor=#ffff88;strokeColor=#9E916F;fontColor=light-dark(#333333,#000000);" value="Registra log WARN vinculando:&#xa;Correlação e Flow" vertex="1">
+          <mxGeometry height="68" width="239" x="965" y="1295" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="kJ4rFk8oJCvgz3O_dG1B" name="USECASE3">
+    <mxGraphModel dx="1664" dy="989" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" value="Retrieve Historical Balance" vertex="1">
+          <mxGeometry height="1280" width="2090" x="30" y="760" as="geometry" />
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-2" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};participant=umlActor;verticalAlign=bottom;labelPosition=center;verticalLabelPosition=top;align=center;size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="BFF / Canal" vertex="1">
+          <mxGeometry height="1156" width="35" x="107" y="840" as="geometry" />
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-3" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Orquestrador" vertex="1">
+          <mxGeometry height="1156" width="150" x="669" y="840" as="geometry" />
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-4" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="MS Carteira Digital" vertex="1">
+          <mxGeometry height="1156" width="152" x="1119" y="840" as="geometry" />
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-5" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Banco de Dados SQL" vertex="1">
+          <mxGeometry height="1156" width="168" x="1900" y="840" as="geometry" />
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-6" parent="1" style="shape=umlFrame;dashed=1;pointerEvents=0;dropTarget=0;strokeColor=#B3B3B3;height=45;width=116;fillColor=light-dark(#eeeeee,#1f2020);fontColor=light-dark(#333333,#cccccc);" value="LOGIC" vertex="1">
+          <mxGeometry height="196" width="811" x="1184" y="1155" as="geometry" />
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-7" parent="6tFgH2sTkm8h9fBCAjcw-6" style="text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" value="[Query Param &#39;atDate&#39; OMITIDO (Consulta Saldo Atual)]" vertex="1">
+          <mxGeometry height="20" width="781" x="30" as="geometry" />
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-8" parent="6tFgH2sTkm8h9fBCAjcw-6" style="shape=line;dashed=1;whiteSpace=wrap;verticalAlign=top;labelPosition=center;verticalLabelPosition=middle;align=center;strokeColor=#B3B3B3;" value="[Query Param &#39;atDate&#39; INFORMADO (Consulta Saldo Histórico)]" vertex="1">
+          <mxGeometry height="4" width="811" y="103" as="geometry" />
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-9" parent="1" style="shape=umlFrame;dashed=1;pointerEvents=0;dropTarget=0;strokeColor=#B3B3B3;height=39;width=119;fillColor=light-dark(#eeeeee,#1f2020);fontColor=light-dark(#333333,#cccccc);" value="REGISTRY" vertex="1">
+          <mxGeometry height="540" width="1824" x="171" y="1361" as="geometry" />
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-10" parent="6tFgH2sTkm8h9fBCAjcw-9" style="text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" value="[Carteira Encontrada / Registro Existente]" vertex="1">
+          <mxGeometry height="20" width="1794" x="30" as="geometry" />
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-11" parent="6tFgH2sTkm8h9fBCAjcw-9" style="shape=line;dashed=1;whiteSpace=wrap;verticalAlign=top;labelPosition=center;verticalLabelPosition=middle;align=center;strokeColor=#B3B3B3;" value="[Carteira Não Encontrada]" vertex="1">
+          <mxGeometry height="4" width="1824" y="275" as="geometry" />
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-12" edge="1" parent="1" source="6tFgH2sTkm8h9fBCAjcw-2" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="6tFgH2sTkm8h9fBCAjcw-3" value="GET /wallets/{walletId}?atDate=2023-10-25T14:30:00Z (Correlation ID)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="472" y="947" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-13" parent="6tFgH2sTkm8h9fBCAjcw-12" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="1" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-288.5" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-14" edge="1" parent="1" source="6tFgH2sTkm8h9fBCAjcw-3" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="6tFgH2sTkm8h9fBCAjcw-4" value="GET /wallets/{walletId}?atDate=2023-10-25T14:30:00Z">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="978" y="1067" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-15" parent="6tFgH2sTkm8h9fBCAjcw-14" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="2" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-233" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-16" edge="1" parent="1" source="6tFgH2sTkm8h9fBCAjcw-4" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="6tFgH2sTkm8h9fBCAjcw-5" value="SELECT wallet_name, saldo_atual FROM wallets WHERE id = walletId">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1598" y="1233" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-17" parent="6tFgH2sTkm8h9fBCAjcw-16" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="3" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-402" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-18" edge="1" parent="1" source="6tFgH2sTkm8h9fBCAjcw-4" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="6tFgH2sTkm8h9fBCAjcw-5" value="SELECT SUM(valor) FROM historico_transacoes WHERE wallet_id = walletId AND timestamp &lt;= atDate">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1598" y="1331" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-19" parent="6tFgH2sTkm8h9fBCAjcw-18" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="4" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-402" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-20" edge="1" parent="1" source="6tFgH2sTkm8h9fBCAjcw-5" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="6tFgH2sTkm8h9fBCAjcw-4" value="Retorna o saldo correspondente (Corrente ou Consolidado)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1601" y="1439" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-21" parent="6tFgH2sTkm8h9fBCAjcw-20" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="5" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="388" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-22" edge="1" parent="1" source="6tFgH2sTkm8h9fBCAjcw-4" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="6tFgH2sTkm8h9fBCAjcw-3" value="Retorna 200 OK (data: { walletName, walletBalance })">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="981" y="1559" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-23" parent="6tFgH2sTkm8h9fBCAjcw-22" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="6" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="219" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-24" edge="1" parent="1" source="6tFgH2sTkm8h9fBCAjcw-3" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="6tFgH2sTkm8h9fBCAjcw-2" value="Retorna 200 OK + Payload">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="475" y="1611" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-25" parent="6tFgH2sTkm8h9fBCAjcw-24" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="7" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="274.5" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-26" edge="1" parent="1" source="6tFgH2sTkm8h9fBCAjcw-5" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="6tFgH2sTkm8h9fBCAjcw-4" value="Retorna vazio (Sem registros)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1601" y="1709" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-27" parent="6tFgH2sTkm8h9fBCAjcw-26" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="8" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="388" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-28" edge="1" parent="1" source="6tFgH2sTkm8h9fBCAjcw-4" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="6tFgH2sTkm8h9fBCAjcw-3" value="Retorna 404 Not Found">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="981" y="1829" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-29" parent="6tFgH2sTkm8h9fBCAjcw-28" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="9" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="219" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-30" edge="1" parent="1" source="6tFgH2sTkm8h9fBCAjcw-3" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="6tFgH2sTkm8h9fBCAjcw-2" value="Retorna 404 Not Found">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="475" y="1881" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-31" parent="6tFgH2sTkm8h9fBCAjcw-30" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="10" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="274.5" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-32" parent="1" style="fillColor=#ffff88;strokeColor=#9E916F;fontColor=light-dark(#333333,#000000);" value="Roteia a requisição de leitura de forma direta&#xa;(Ignora DynamoDB)" vertex="1">
+          <mxGeometry height="68" width="337" x="576" y="967" as="geometry" />
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-33" parent="1" style="fillColor=#ffff88;strokeColor=#9E916F;fontColor=light-dark(#333333,#000000);" value="Valida contrato (Flow: wallet_balance_flow)&#xa;Garante que a data informada não é futura" vertex="1">
+          <mxGeometry height="68" width="322" x="1034" y="1087" as="geometry" />
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-34" parent="1" style="fillColor=#ffff88;strokeColor=#9E916F;fontColor=light-dark(#333333,#000000);" value="Registra log INFO vinculando:&#xa;walletId, Correlação e Flow" vertex="1">
+          <mxGeometry height="68" width="229" x="1081" y="1459" as="geometry" />
+        </mxCell>
+        <mxCell id="6tFgH2sTkm8h9fBCAjcw-35" parent="1" style="fillColor=#ffff88;strokeColor=#9E916F;fontColor=light-dark(#333333,#000000);" value="Registra log WARN vinculando:&#xa;Correlação e Flow" vertex="1">
+          <mxGeometry height="68" width="239" x="1076" y="1729" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="8bK8mQ7WCbf-coLkdyHo" name="USECASE4">
+    <mxGraphModel dx="1414" dy="841" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" value="Transfer Funds" vertex="1">
+          <mxGeometry height="2510" width="2412" x="120" y="660" as="geometry" />
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-2" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};participant=umlActor;verticalAlign=bottom;labelPosition=center;verticalLabelPosition=top;align=center;size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="BFF / Canal" vertex="1">
+          <mxGeometry height="2309" width="35" x="208" y="798.5" as="geometry" />
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-3" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Orquestrador (DynamoDB)" vertex="1">
+          <mxGeometry height="2309" width="209" x="601" y="798.5" as="geometry" />
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-4" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="wallet-transaction-requests-topic" vertex="1">
+          <mxGeometry height="2309" width="256" x="875" y="798.5" as="geometry" />
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-5" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="wallet-ms-transfer-commands-queue" vertex="1">
+          <mxGeometry height="2309" width="284" x="1181" y="798.5" as="geometry" />
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-6" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="MS Carteira Digital (SQL)" vertex="1">
+          <mxGeometry height="2309" width="195" x="1551" y="798.5" as="geometry" />
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-7" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="wallet-transaction-results-topic" vertex="1">
+          <mxGeometry height="2309" width="242" x="1911" y="798.5" as="geometry" />
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-8" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="orchestrator-wallet-callback-queue" vertex="1">
+          <mxGeometry height="2309" width="267" x="2203" y="798.5" as="geometry" />
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-9" parent="1" style="shape=umlFrame;dashed=1;pointerEvents=0;dropTarget=0;strokeColor=#B3B3B3;height=20;width=0;fillColor=light-dark(#eeeeee,#1f2020);fontColor=light-dark(#333333,#cccccc);" value="" vertex="1">
+          <mxGeometry height="69" width="2124" x="248" y="873.5" as="geometry" />
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-10" parent="WuSL7JquJoKfTqYyc-E7-9" style="text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" value="" vertex="1">
+          <mxGeometry height="20" width="2124" as="geometry" />
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-11" parent="1" style="shape=umlFrame;dashed=1;pointerEvents=0;dropTarget=0;strokeColor=#B3B3B3;height=20;width=0;fillColor=light-dark(#eeeeee,#1f2020);fontColor=light-dark(#333333,#cccccc);" value="" vertex="1">
+          <mxGeometry height="69" width="2124" x="248" y="1799.5" as="geometry" />
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-12" parent="WuSL7JquJoKfTqYyc-E7-11" style="text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" value="" vertex="1">
+          <mxGeometry height="20" width="2124" as="geometry" />
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-13" parent="1" style="shape=umlFrame;dashed=1;pointerEvents=0;dropTarget=0;strokeColor=#B3B3B3;height=20;width=30;fillColor=light-dark(#eeeeee,#1f2020);fontColor=light-dark(#333333,#cccccc);" value="alt" vertex="1">
+          <mxGeometry height="636" width="1387" x="272" y="2164.5" as="geometry" />
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-14" parent="WuSL7JquJoKfTqYyc-E7-13" style="text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" value="[Sucesso no procedimento Síncrono]" vertex="1">
+          <mxGeometry height="20" width="1357" x="30" as="geometry" />
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-15" parent="WuSL7JquJoKfTqYyc-E7-13" style="shape=line;dashed=1;whiteSpace=wrap;verticalAlign=top;labelPosition=center;verticalLabelPosition=middle;align=center;strokeColor=#B3B3B3;" value="[Falha Crítica / Esgotou 3 tentativas]" vertex="1">
+          <mxGeometry height="4" width="1387" y="341" as="geometry" />
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-16" parent="1" style="shape=umlFrame;dashed=1;pointerEvents=0;dropTarget=0;strokeColor=#B3B3B3;height=20;width=30;fillColor=light-dark(#eeeeee,#1f2020);fontColor=light-dark(#333333,#cccccc);" value="alt" vertex="1">
+          <mxGeometry height="1014" width="1407" x="262" y="1998.5" as="geometry" />
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-17" parent="WuSL7JquJoKfTqYyc-E7-16" style="text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" value="[Status ainda é PENDENTE no DynamoDB]" vertex="1">
+          <mxGeometry height="20" width="1377" x="30" as="geometry" />
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-18" parent="WuSL7JquJoKfTqYyc-E7-16" style="shape=line;dashed=1;whiteSpace=wrap;verticalAlign=top;labelPosition=center;verticalLabelPosition=middle;align=center;strokeColor=#B3B3B3;" value="[Status já atualizado como CONCLUÍDO pela Fila]" vertex="1">
+          <mxGeometry height="4" width="1407" y="817" as="geometry" />
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-19" edge="1" parent="1" source="WuSL7JquJoKfTqYyc-E7-2" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="WuSL7JquJoKfTqYyc-E7-3" value="POST /wallet/{fromWalletId}/transfer (Payload)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="503" y="984.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-20" parent="WuSL7JquJoKfTqYyc-E7-19" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="1" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-218.5" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-21" edge="1" parent="1" source="WuSL7JquJoKfTqYyc-E7-3" style="curved=1;endArrow=block;rounded=0;" target="WuSL7JquJoKfTqYyc-E7-3" value="Valida risco de travamento de duplicidade">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="756" y="1104.5" />
+              <mxPoint x="756" y="1134.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-22" parent="WuSL7JquJoKfTqYyc-E7-21" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="2" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-57" y="-22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-23" edge="1" parent="1" source="WuSL7JquJoKfTqYyc-E7-3" style="curved=1;endArrow=block;rounded=0;" target="WuSL7JquJoKfTqYyc-E7-3" value="Salva no DynamoDB (Status: PENDENTE)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="756" y="1186.5" />
+              <mxPoint x="756" y="1216.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-24" parent="WuSL7JquJoKfTqYyc-E7-23" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="3" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-57" y="-22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-25" edge="1" parent="1" source="WuSL7JquJoKfTqYyc-E7-3" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="WuSL7JquJoKfTqYyc-E7-4" value="Publica no tópico de requisições">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="863" y="1268.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-26" parent="WuSL7JquJoKfTqYyc-E7-25" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="4" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-156.5" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-27" edge="1" parent="1" source="WuSL7JquJoKfTqYyc-E7-4" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="WuSL7JquJoKfTqYyc-E7-5" value="Encaminha para a fila da carteira">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1172" y="1320.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-28" parent="WuSL7JquJoKfTqYyc-E7-27" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="5" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-167.5" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-29" edge="1" parent="1" source="WuSL7JquJoKfTqYyc-E7-3" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="WuSL7JquJoKfTqYyc-E7-2" value="Retorna 201 Created (Status: PENDENTE)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="506" y="1372.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-30" parent="WuSL7JquJoKfTqYyc-E7-29" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="6" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="204.5" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-31" edge="1" parent="1" source="WuSL7JquJoKfTqYyc-E7-5" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="WuSL7JquJoKfTqYyc-E7-6" value="Consome comando de transferência">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1494" y="1473.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-32" parent="WuSL7JquJoKfTqYyc-E7-31" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="7" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-170" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-33" edge="1" parent="1" source="WuSL7JquJoKfTqYyc-E7-6" style="curved=1;endArrow=block;rounded=0;" target="WuSL7JquJoKfTqYyc-E7-6" value="Deduz da origem e incrementa no destino">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1699" y="1593.5" />
+              <mxPoint x="1699" y="1623.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-34" parent="WuSL7JquJoKfTqYyc-E7-33" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="8" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-57" y="-22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-35" edge="1" parent="1" source="WuSL7JquJoKfTqYyc-E7-6" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="WuSL7JquJoKfTqYyc-E7-7" value="Publica resultado: CONCLUÍDO (ou FALHOU)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1849" y="1675.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-36" parent="WuSL7JquJoKfTqYyc-E7-35" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="9" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-199.5" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-37" edge="1" parent="1" source="WuSL7JquJoKfTqYyc-E7-7" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="WuSL7JquJoKfTqYyc-E7-8" value="Roteia para o Orquestrador">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2193" y="1727.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-38" parent="WuSL7JquJoKfTqYyc-E7-37" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="10" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-159.75" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-39" edge="1" parent="1" source="WuSL7JquJoKfTqYyc-E7-8" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="WuSL7JquJoKfTqYyc-E7-3" value="Consome e atualiza DynamoDB para CONCLUÍDO">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1532" y="1779.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-40" parent="WuSL7JquJoKfTqYyc-E7-39" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="11" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="809.25" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-41" edge="1" parent="1" source="WuSL7JquJoKfTqYyc-E7-2" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="WuSL7JquJoKfTqYyc-E7-3" value="GET /status/{transferId}">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="503" y="1978.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-42" parent="WuSL7JquJoKfTqYyc-E7-41" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="12" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-218.5" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-43" edge="1" parent="1" source="WuSL7JquJoKfTqYyc-E7-3" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="WuSL7JquJoKfTqYyc-E7-6" value="POST /wallet/{walletId}/balance (Force Sync)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1185" y="2144.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-44" parent="WuSL7JquJoKfTqYyc-E7-43" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="13" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-479" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-45" edge="1" parent="1" source="WuSL7JquJoKfTqYyc-E7-6" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="WuSL7JquJoKfTqYyc-E7-3" value="Retorna 201 Created (Transferência Efetivada)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1188" y="2242.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-46" parent="WuSL7JquJoKfTqYyc-E7-45" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="14" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="465" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-47" edge="1" parent="1" source="WuSL7JquJoKfTqYyc-E7-3" style="curved=1;endArrow=block;rounded=0;" target="WuSL7JquJoKfTqYyc-E7-3" value="Atualiza DynamoDB: CONCLUÍDO">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="756" y="2294.5" />
+              <mxPoint x="756" y="2324.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-48" parent="WuSL7JquJoKfTqYyc-E7-47" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="15" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-57" y="-22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-49" edge="1" parent="1" source="WuSL7JquJoKfTqYyc-E7-3" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="WuSL7JquJoKfTqYyc-E7-6" value="GET /wallets/{walletId} (Consulta novo saldo)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1185" y="2376.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-50" parent="WuSL7JquJoKfTqYyc-E7-49" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="16" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-479" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-51" edge="1" parent="1" source="WuSL7JquJoKfTqYyc-E7-6" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="WuSL7JquJoKfTqYyc-E7-3" value="Retorna Saldo Atualizado">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1188" y="2428.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-52" parent="WuSL7JquJoKfTqYyc-E7-51" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="17" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="465" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-53" edge="1" parent="1" source="WuSL7JquJoKfTqYyc-E7-3" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="WuSL7JquJoKfTqYyc-E7-2" value="Retorna 200 OK + Saldo + Sucesso">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="506" y="2480.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-54" parent="WuSL7JquJoKfTqYyc-E7-53" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="18" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="204.5" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-55" edge="1" parent="1" source="WuSL7JquJoKfTqYyc-E7-6" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="WuSL7JquJoKfTqYyc-E7-3" value="Retorna Erro / Indisponível">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1188" y="2578.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-56" parent="WuSL7JquJoKfTqYyc-E7-55" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="19" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="465" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-57" edge="1" parent="1" source="WuSL7JquJoKfTqYyc-E7-3" style="curved=1;endArrow=block;rounded=0;" target="WuSL7JquJoKfTqYyc-E7-3" value="Aborta e Atualiza DynamoDB: FALHOU">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="756" y="2630.5" />
+              <mxPoint x="756" y="2660.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-58" parent="WuSL7JquJoKfTqYyc-E7-57" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="20" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-57" y="-22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-59" edge="1" parent="1" source="WuSL7JquJoKfTqYyc-E7-3" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="WuSL7JquJoKfTqYyc-E7-2" value="Retorna 500 ou 400 (Tente novamente mais tarde)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="506" y="2780.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-60" parent="WuSL7JquJoKfTqYyc-E7-59" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="21" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="204.5" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-61" edge="1" parent="1" source="WuSL7JquJoKfTqYyc-E7-3" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="WuSL7JquJoKfTqYyc-E7-6" value="GET /wallets/{walletId} (Consulta novo saldo)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1185" y="2888.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-62" parent="WuSL7JquJoKfTqYyc-E7-61" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="22" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-479" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-63" edge="1" parent="1" source="WuSL7JquJoKfTqYyc-E7-6" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="WuSL7JquJoKfTqYyc-E7-3" value="Retorna Saldo Atualizado">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1188" y="2940.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-64" parent="WuSL7JquJoKfTqYyc-E7-63" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="23" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="465" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-65" edge="1" parent="1" source="WuSL7JquJoKfTqYyc-E7-3" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="WuSL7JquJoKfTqYyc-E7-2" value="Retorna 200 OK + Saldo + Sucesso">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="506" y="2992.5" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-66" parent="WuSL7JquJoKfTqYyc-E7-65" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="24" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="204.5" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-67" parent="1" style="fillColor=#ffff88;strokeColor=#9E916F;fontColor=light-dark(#333333,#000000);" value="PARTE 1: Fluxo Assíncrono Padrão" vertex="1">
+          <mxGeometry height="49" width="2104" x="258" y="893.5" as="geometry" />
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-68" parent="1" style="fillColor=#ffff88;strokeColor=#9E916F;fontColor=light-dark(#333333,#000000);" value="Calcula Idempotência:&#xa;uuidv5(from+to+valor) + _timestamp" vertex="1">
+          <mxGeometry height="68" width="284" x="563" y="1004.5" as="geometry" />
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-69" parent="1" style="fillColor=#ffff88;strokeColor=#9E916F;fontColor=light-dark(#333333,#000000);" value="Processamento da Fila (Em paralelo)" vertex="1">
+          <mxGeometry height="49" width="275" x="1511" y="1392.5" as="geometry" />
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-70" parent="1" style="fillColor=#ffff88;strokeColor=#9E916F;fontColor=light-dark(#333333,#000000);" value="Abre transação ACID no SQL&#xa;Garante rastreabilidade e auditoria" vertex="1">
+          <mxGeometry height="68" width="264" x="1516" y="1493.5" as="geometry" />
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-71" parent="1" style="fillColor=#ffff88;strokeColor=#9E916F;fontColor=light-dark(#333333,#000000);" value="PARTE 2: Contingência (Consistência Eventual / Force Exec)" vertex="1">
+          <mxGeometry height="49" width="2104" x="258" y="1819.5" as="geometry" />
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-72" parent="1" style="fillColor=#ffff88;strokeColor=#9E916F;fontColor=light-dark(#333333,#000000);" value="Canal consulta o status novamente&#xa;e a fila ainda está processando (PENDENTE)" vertex="1">
+          <mxGeometry height="68" width="327" x="120" y="1878.5" as="geometry" />
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-73" parent="1" style="fillColor=#ffff88;strokeColor=#9E916F;fontColor=light-dark(#333333,#000000);" value="Ativa política de resiliência:&#xa;Execução Síncrona Forçada (Até 3 tentativas)" vertex="1">
+          <mxGeometry height="68" width="335" x="538" y="2044.5" as="geometry" />
+        </mxCell>
+        <mxCell id="WuSL7JquJoKfTqYyc-E7-74" parent="1" style="fillColor=#ffff88;strokeColor=#9E916F;fontColor=light-dark(#333333,#000000);" value="Dispara Notificação para o cliente&#xa;através do time responsável" vertex="1">
+          <mxGeometry height="68" width="258" x="576" y="2680.5" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="MrW0qx8rk57qz_BsIO-b" name="USECASE5">
+    <mxGraphModel dx="1414" dy="841" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" value="Deposit Funds:" vertex="1">
+          <mxGeometry height="1410" width="1616" x="150" y="860" as="geometry" />
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-2" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};participant=umlActor;verticalAlign=bottom;labelPosition=center;verticalLabelPosition=top;align=center;size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="BFF / Canal" vertex="1">
+          <mxGeometry height="1255" width="35" x="216" y="950" as="geometry" />
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-3" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Orquestrador (DynamoDB)" vertex="1">
+          <mxGeometry height="1255" width="209" x="599" y="950" as="geometry" />
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-4" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="MS Gestão de Contas" vertex="1">
+          <mxGeometry height="1255" width="172" x="924" y="950" as="geometry" />
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-5" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="wallet-transaction-requests-topic" vertex="1">
+          <mxGeometry height="1255" width="256" x="1146" y="950" as="geometry" />
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-6" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="MS Carteira Digital (SQL)" vertex="1">
+          <mxGeometry height="1255" width="195" x="1452" y="950" as="geometry" />
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-7" parent="1" style="shape=umlFrame;dashed=1;pointerEvents=0;dropTarget=0;strokeColor=#B3B3B3;height=20;width=30;fillColor=light-dark(#eeeeee,#1f2020);fontColor=light-dark(#333333,#cccccc);" value="alt" vertex="1">
+          <mxGeometry height="595" width="1423" x="280" y="1505" as="geometry" />
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-8" parent="ou4jzBPAA58aJQWPEh6H-7" style="text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" value="[Conta sem saldo ou inativa]" vertex="1">
+          <mxGeometry height="20" width="1393" x="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-9" parent="ou4jzBPAA58aJQWPEh6H-7" style="shape=line;dashed=1;whiteSpace=wrap;verticalAlign=top;labelPosition=center;verticalLabelPosition=middle;align=center;strokeColor=#B3B3B3;" value="[Débito com Sucesso]" vertex="1">
+          <mxGeometry height="4" width="1423" y="237" as="geometry" />
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-10" parent="1" style="shape=umlFrame;dashed=1;pointerEvents=0;dropTarget=0;strokeColor=#B3B3B3;height=20;width=30;fillColor=light-dark(#eeeeee,#1f2020);fontColor=light-dark(#333333,#cccccc);" value="alt" vertex="1">
+          <mxGeometry height="883" width="1443" x="270" y="1227" as="geometry" />
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-11" parent="ou4jzBPAA58aJQWPEh6H-10" style="text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" value="[Chave Duplicada (Janela de risco ativa)]" vertex="1">
+          <mxGeometry height="20" width="1413" x="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-12" parent="ou4jzBPAA58aJQWPEh6H-10" style="shape=line;dashed=1;whiteSpace=wrap;verticalAlign=top;labelPosition=center;verticalLabelPosition=middle;align=center;strokeColor=#B3B3B3;" value="[Chave Válida (Nova transação)]" vertex="1">
+          <mxGeometry height="4" width="1443" y="103" as="geometry" />
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-13" edge="1" parent="1" source="ou4jzBPAA58aJQWPEh6H-2" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="ou4jzBPAA58aJQWPEh6H-3" value="POST /wallets/{walletId}/deposit (Payload)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="506" y="1057" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-14" parent="ou4jzBPAA58aJQWPEh6H-13" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="1" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-213.5" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-15" edge="1" parent="1" source="ou4jzBPAA58aJQWPEh6H-3" style="curved=1;endArrow=block;rounded=0;" target="ou4jzBPAA58aJQWPEh6H-3" value="Consulta/Grava Chave no DynamoDB">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="754" y="1177" />
+              <mxPoint x="754" y="1207" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-16" parent="ou4jzBPAA58aJQWPEh6H-15" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="2" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-57" y="-22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-17" edge="1" parent="1" source="ou4jzBPAA58aJQWPEh6H-3" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="ou4jzBPAA58aJQWPEh6H-2" value="Retorna 400 Bad Request (Requisição Duplicada)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="509" y="1305" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-18" parent="ou4jzBPAA58aJQWPEh6H-17" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="3" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="199.5" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-19" edge="1" parent="1" source="ou4jzBPAA58aJQWPEh6H-3" style="curved=1;endArrow=block;rounded=0;" target="ou4jzBPAA58aJQWPEh6H-3" value="Define Status: PENDENTE">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="754" y="1403" />
+              <mxPoint x="754" y="1433" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-20" parent="ou4jzBPAA58aJQWPEh6H-19" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="4" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-57" y="-22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-21" edge="1" parent="1" source="ou4jzBPAA58aJQWPEh6H-3" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="ou4jzBPAA58aJQWPEh6H-4" value="Solicita Débito Síncrono na Conta">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="865" y="1485" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-22" parent="ou4jzBPAA58aJQWPEh6H-21" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="5" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-161" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-23" edge="1" parent="1" source="ou4jzBPAA58aJQWPEh6H-4" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="ou4jzBPAA58aJQWPEh6H-3" value="Erro: Falha no débito">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="868" y="1583" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-24" parent="ou4jzBPAA58aJQWPEh6H-23" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="6" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="147" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-25" edge="1" parent="1" source="ou4jzBPAA58aJQWPEh6H-3" style="curved=1;endArrow=block;rounded=0;" target="ou4jzBPAA58aJQWPEh6H-3" value="Atualiza DynamoDB: FALHOU">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="754" y="1635" />
+              <mxPoint x="754" y="1665" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-26" parent="ou4jzBPAA58aJQWPEh6H-25" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="7" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-57" y="-22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-27" edge="1" parent="1" source="ou4jzBPAA58aJQWPEh6H-3" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="ou4jzBPAA58aJQWPEh6H-2" value="Retorna 400 / 500">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="509" y="1717" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-28" parent="ou4jzBPAA58aJQWPEh6H-27" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="8" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="199.5" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-29" edge="1" parent="1" source="ou4jzBPAA58aJQWPEh6H-4" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="ou4jzBPAA58aJQWPEh6H-3" value="OK! Dinheiro retirado da Conta.">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="868" y="1815" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-30" parent="ou4jzBPAA58aJQWPEh6H-29" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="9" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="147" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-31" edge="1" parent="1" source="ou4jzBPAA58aJQWPEh6H-3" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="ou4jzBPAA58aJQWPEh6H-5" value="Publica evento de Depósito (transferId, de: accountId, para: walletId)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="997" y="1867" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-32" parent="ou4jzBPAA58aJQWPEh6H-31" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="10" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-293" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-33" edge="1" parent="1" source="ou4jzBPAA58aJQWPEh6H-3" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="ou4jzBPAA58aJQWPEh6H-2" value="Retorna 201 Created (Status: PENDENTE)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="509" y="1919" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-34" parent="ou4jzBPAA58aJQWPEh6H-33" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="11" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="199.5" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-35" edge="1" parent="1" source="ou4jzBPAA58aJQWPEh6H-6" style="curved=1;endArrow=block;rounded=0;" target="ou4jzBPAA58aJQWPEh6H-6" value="Incrementa saldo e grava histórico (SQL)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1601" y="2020" />
+              <mxPoint x="1601" y="2050" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-36" parent="ou4jzBPAA58aJQWPEh6H-35" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="12" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-57" y="-22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-37" parent="1" style="fillColor=#ffff88;strokeColor=#9E916F;fontColor=light-dark(#333333,#000000);" value="Mapeia: from = accountId / to = walletId&#xa;Calcula: uuidv5(from+to+valor) + _timestamp" vertex="1">
+          <mxGeometry height="68" width="342" x="532" y="1077" as="geometry" />
+        </mxCell>
+        <mxCell id="ou4jzBPAA58aJQWPEh6H-38" parent="1" style="fillColor=#ffff88;strokeColor=#9E916F;fontColor=light-dark(#333333,#000000);" value="Fila consome o comando ao fundo..." vertex="1">
+          <mxGeometry height="49" width="276" x="1412" y="1939" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="CR4jqIt3pFmh38gWyej-" name="USECASE6">
+    <mxGraphModel dx="1414" dy="841" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;verticalAlign=top;" value="Withdraw Funds:" vertex="1">
+          <mxGeometry height="2090" width="1835" x="90" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-2" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};participant=umlActor;verticalAlign=bottom;labelPosition=center;verticalLabelPosition=top;align=center;size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="BFF / Canal" vertex="1">
+          <mxGeometry height="1945" width="35" x="145" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-3" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="Orquestrador (DynamoDB)" vertex="1">
+          <mxGeometry height="1945" width="209" x="528" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-4" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="wallet-transaction-requests-topic" vertex="1">
+          <mxGeometry height="1945" width="256" x="797" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-5" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="MS Carteira Digital (SQL)" vertex="1">
+          <mxGeometry height="1945" width="195" x="1103" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-6" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="wallet-transaction-results-topic" vertex="1">
+          <mxGeometry height="1945" width="242" x="1393" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-7" parent="1" style="shape=umlLifeline;perimeter=lifelinePerimeter;whiteSpace=wrap;container=1;dropTarget=0;collapsible=0;recursiveResize=0;outlineConnect=0;portConstraint=eastwest;newEdgeStyle={&quot;edgeStyle&quot;:&quot;elbowEdgeStyle&quot;,&quot;elbow&quot;:&quot;vertical&quot;,&quot;curved&quot;:0,&quot;rounded&quot;:0};size=65;fillColor=light-dark(#eeeeee,#1f2020);strokeColor=light-dark(#999999,#cccccc);fontColor=light-dark(#333333,#cccccc);" value="MS Gestão de Contas" vertex="1">
+          <mxGeometry height="1945" width="172" x="1685" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-8" parent="1" style="shape=umlFrame;dashed=1;pointerEvents=0;dropTarget=0;strokeColor=#B3B3B3;height=20;width=30;fillColor=light-dark(#eeeeee,#1f2020);fontColor=light-dark(#333333,#cccccc);" value="alt" vertex="1">
+          <mxGeometry height="658" width="1278" x="504" y="1622" as="geometry" />
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-9" parent="Evn4RkSy8S-_6JOgjskO-8" style="text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" value="[Sucesso no Crédito]" vertex="1">
+          <mxGeometry height="20" width="1248" x="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-10" parent="Evn4RkSy8S-_6JOgjskO-8" style="shape=line;dashed=1;whiteSpace=wrap;verticalAlign=top;labelPosition=center;verticalLabelPosition=middle;align=center;strokeColor=#B3B3B3;" value="[Falha no Crédito]" vertex="1">
+          <mxGeometry height="4" width="1278" y="319" as="geometry" />
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-11" parent="1" style="shape=umlFrame;dashed=1;pointerEvents=0;dropTarget=0;strokeColor=#B3B3B3;height=20;width=30;fillColor=light-dark(#eeeeee,#1f2020);fontColor=light-dark(#333333,#cccccc);" value="alt" vertex="1">
+          <mxGeometry height="1102" width="1298" x="494" y="1188" as="geometry" />
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-12" parent="Evn4RkSy8S-_6JOgjskO-11" style="text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" value="[Saldo Insuficiente na Carteira]" vertex="1">
+          <mxGeometry height="20" width="1268" x="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-13" parent="Evn4RkSy8S-_6JOgjskO-11" style="shape=line;dashed=1;whiteSpace=wrap;verticalAlign=top;labelPosition=center;verticalLabelPosition=middle;align=center;strokeColor=#B3B3B3;" value="[Saldo Disponível]" vertex="1">
+          <mxGeometry height="4" width="1298" y="155" as="geometry" />
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-14" parent="1" style="shape=umlFrame;dashed=1;pointerEvents=0;dropTarget=0;strokeColor=#B3B3B3;height=20;width=30;fillColor=light-dark(#eeeeee,#1f2020);fontColor=light-dark(#333333,#cccccc);" value="alt" vertex="1">
+          <mxGeometry height="1573" width="1593" x="209" y="727" as="geometry" />
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-15" parent="Evn4RkSy8S-_6JOgjskO-14" style="text;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;" value="[Chave Duplicada (Janela de risco ativa)]" vertex="1">
+          <mxGeometry height="20" width="1563" x="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-16" parent="Evn4RkSy8S-_6JOgjskO-14" style="shape=line;dashed=1;whiteSpace=wrap;verticalAlign=top;labelPosition=center;verticalLabelPosition=middle;align=center;strokeColor=#B3B3B3;" value="[Chave Válida (Nova transação)]" vertex="1">
+          <mxGeometry height="4" width="1593" y="103" as="geometry" />
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-17" edge="1" parent="1" source="Evn4RkSy8S-_6JOgjskO-2" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="Evn4RkSy8S-_6JOgjskO-3" value="POST /wallets/{walletId}/withdraw (Payload)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="435" y="557" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-18" parent="Evn4RkSy8S-_6JOgjskO-17" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="1" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-213.5" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-19" edge="1" parent="1" source="Evn4RkSy8S-_6JOgjskO-3" style="curved=1;endArrow=block;rounded=0;" target="Evn4RkSy8S-_6JOgjskO-3" value="Consulta/Grava Chave no DynamoDB">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="683" y="677" />
+              <mxPoint x="683" y="707" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-20" parent="Evn4RkSy8S-_6JOgjskO-19" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="2" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-57" y="-22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-21" edge="1" parent="1" source="Evn4RkSy8S-_6JOgjskO-3" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="Evn4RkSy8S-_6JOgjskO-2" value="Retorna 400 Bad Request (Requisição Duplicada)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="438" y="805" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-22" parent="Evn4RkSy8S-_6JOgjskO-21" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="3" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="199.5" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-23" edge="1" parent="1" source="Evn4RkSy8S-_6JOgjskO-3" style="curved=1;endArrow=block;rounded=0;" target="Evn4RkSy8S-_6JOgjskO-3" value="Define Status: PENDENTE">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="683" y="903" />
+              <mxPoint x="683" y="933" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-24" parent="Evn4RkSy8S-_6JOgjskO-23" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="4" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-57" y="-22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-25" edge="1" parent="1" source="Evn4RkSy8S-_6JOgjskO-3" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="Evn4RkSy8S-_6JOgjskO-4" value="Publica comando de Saque">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="787" y="985" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-26" parent="Evn4RkSy8S-_6JOgjskO-25" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="5" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-154" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-27" edge="1" parent="1" source="Evn4RkSy8S-_6JOgjskO-3" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="Evn4RkSy8S-_6JOgjskO-2" value="Retorna 201 Created (Status: PENDENTE)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="438" y="1037" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-28" parent="Evn4RkSy8S-_6JOgjskO-27" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="6" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="199.5" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-29" edge="1" parent="1" source="Evn4RkSy8S-_6JOgjskO-5" style="curved=1;endArrow=block;rounded=0;" target="Evn4RkSy8S-_6JOgjskO-5" value="Valida saldo_atual &gt;= valor (SQL)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1252" y="1138" />
+              <mxPoint x="1252" y="1168" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-30" parent="Evn4RkSy8S-_6JOgjskO-29" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="7" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-57" y="-22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-31" edge="1" parent="1" source="Evn4RkSy8S-_6JOgjskO-5" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="Evn4RkSy8S-_6JOgjskO-6" value="Publica: FALHA (Saldo Insuficiente)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1366" y="1266" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-32" parent="Evn4RkSy8S-_6JOgjskO-31" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="8" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-164" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-33" edge="1" parent="1" source="Evn4RkSy8S-_6JOgjskO-6" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="Evn4RkSy8S-_6JOgjskO-3" value="Orquestrador atualiza DynamoDB para FALHOU">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1084" y="1318" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-34" parent="Evn4RkSy8S-_6JOgjskO-33" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="9" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="434.25" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-35" edge="1" parent="1" source="Evn4RkSy8S-_6JOgjskO-5" style="curved=1;endArrow=block;rounded=0;" target="Evn4RkSy8S-_6JOgjskO-5" value="Bloqueia/Deduz valor imediatamente (SQL)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1252" y="1416" />
+              <mxPoint x="1252" y="1446" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-36" parent="Evn4RkSy8S-_6JOgjskO-35" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="10" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-57" y="-22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-37" edge="1" parent="1" source="Evn4RkSy8S-_6JOgjskO-5" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="Evn4RkSy8S-_6JOgjskO-6" value="Publica: VALOR_RETIDO">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1366" y="1498" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-38" parent="Evn4RkSy8S-_6JOgjskO-37" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="11" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-164" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-39" edge="1" parent="1" source="Evn4RkSy8S-_6JOgjskO-6" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="Evn4RkSy8S-_6JOgjskO-3" value="Orquestrador assume o controle">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1084" y="1550" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-40" parent="Evn4RkSy8S-_6JOgjskO-39" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="12" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="434.25" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-41" edge="1" parent="1" source="Evn4RkSy8S-_6JOgjskO-3" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="Evn4RkSy8S-_6JOgjskO-7" value="Solicita Crédito na Conta Corrente">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1210" y="1602" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-42" parent="Evn4RkSy8S-_6JOgjskO-41" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="13" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-576.75" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-43" edge="1" parent="1" source="Evn4RkSy8S-_6JOgjskO-7" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="Evn4RkSy8S-_6JOgjskO-3" value="OK! Conta creditada.">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1213" y="1700" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-44" parent="Evn4RkSy8S-_6JOgjskO-43" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="14" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="562.75" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-45" edge="1" parent="1" source="Evn4RkSy8S-_6JOgjskO-3" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="Evn4RkSy8S-_6JOgjskO-4" value="Comando: CONFIRMAR_SAQUE">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="787" y="1752" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-46" parent="Evn4RkSy8S-_6JOgjskO-45" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="15" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-154" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-47" edge="1" parent="1" source="Evn4RkSy8S-_6JOgjskO-5" style="curved=1;endArrow=block;rounded=0;" target="Evn4RkSy8S-_6JOgjskO-5" value="Consolida histórico como CONCLUÍDO">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1252" y="1804" />
+              <mxPoint x="1252" y="1834" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-48" parent="Evn4RkSy8S-_6JOgjskO-47" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="16" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-57" y="-22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-49" edge="1" parent="1" source="Evn4RkSy8S-_6JOgjskO-3" style="curved=1;endArrow=block;rounded=0;" target="Evn4RkSy8S-_6JOgjskO-3" value="Atualiza DynamoDB: CONCLUÍDO">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="683" y="1886" />
+              <mxPoint x="683" y="1916" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-50" parent="Evn4RkSy8S-_6JOgjskO-49" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="17" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-57" y="-22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-51" edge="1" parent="1" source="Evn4RkSy8S-_6JOgjskO-7" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;dashed=1;dashPattern=2 3;endArrow=block;" target="Evn4RkSy8S-_6JOgjskO-3" value="Erro (ex: Conta inexistente)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1213" y="2014" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-52" parent="Evn4RkSy8S-_6JOgjskO-51" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="18" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="562.75" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-53" edge="1" parent="1" source="Evn4RkSy8S-_6JOgjskO-3" style="verticalAlign=bottom;edgeStyle=elbowEdgeStyle;elbow=vertical;curved=0;rounded=0;endArrow=block;" target="Evn4RkSy8S-_6JOgjskO-4" value="Comando: ESTORNAR_SAQUE">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="787" y="2066" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-54" parent="Evn4RkSy8S-_6JOgjskO-53" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="19" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-154" y="-7" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-55" edge="1" parent="1" source="Evn4RkSy8S-_6JOgjskO-5" style="curved=1;endArrow=block;rounded=0;" target="Evn4RkSy8S-_6JOgjskO-5" value="Devolve valor ao saldo do cliente (SQL)">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1252" y="2118" />
+              <mxPoint x="1252" y="2148" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-56" parent="Evn4RkSy8S-_6JOgjskO-55" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="20" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-57" y="-22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-57" edge="1" parent="1" source="Evn4RkSy8S-_6JOgjskO-3" style="curved=1;endArrow=block;rounded=0;" target="Evn4RkSy8S-_6JOgjskO-3" value="Atualiza DynamoDB: FALHOU">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="683" y="2200" />
+              <mxPoint x="683" y="2230" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-58" parent="Evn4RkSy8S-_6JOgjskO-57" style="ellipse;aspect=fixed;fillColor=#000000;align=center;fontColor=#FFFFFF;" value="21" vertex="1">
+          <mxGeometry height="14" relative="1" width="14" as="geometry">
+            <mxPoint x="-57" y="-22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-59" parent="1" style="fillColor=#ffff88;strokeColor=#9E916F;fontColor=light-dark(#333333,#000000);" value="Mapeia: from = walletId / to = accountId&#xa;Calcula: uuidv5(from+to+valor) + _timestamp" vertex="1">
+          <mxGeometry height="68" width="342" x="461" y="577" as="geometry" />
+        </mxCell>
+        <mxCell id="Evn4RkSy8S-_6JOgjskO-60" parent="1" style="fillColor=#ffff88;strokeColor=#9E916F;fontColor=light-dark(#333333,#000000);" value="Processamento Assíncrono da Fila" vertex="1">
+          <mxGeometry height="49" width="259" x="1071" y="1057" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

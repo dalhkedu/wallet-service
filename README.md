@@ -1,438 +1,314 @@
-# Architectural Design Record & Software Development Plan: `ms-wallet-digital`
+# Production-Ready Distributed Ledger & Digital Wallet Service (`ms-wallet-digital`)
 
+This repository contains the core Digital Wallet Microservice (`ms-wallet-digital`), a mission-critical financial ledger engineered to handle secure value movements. The microservice operates as a high-throughput, append-only transaction ledger that guarantees absolute financial consistency, strict data integrity, and deterministic zero-double-spending capabilities under extreme concurrent loads.
+
+![System Architecture](./solution.png)
 ---
-Grafana
-http://localhost:3000/login
-adin / admin
-
-Sonacube
-http://localhost:9000/
-admin / admin
-
-Prometheus
-http://localhost:9090/
-
-RabbitMq
-http://localhost:15672
-admin / admin
-
-
-http://localhost:8080/swagger-ui/index.html
-
 
 ## 1. Executive Summary & Quality Framework Alignment
 
-This document serves as the official **Architectural Design Record (ADR)** and **Development Plan** for the Digital Wallet Microservice (`ms-wallet-digital`). This service represents a mission-critical component within the payment ecosystem ; its zero-downtime availability, strict transaction correctness, and absolute traceability are foundational to the platform’s business continuity.
+This system is built from the ground up to fulfill the demands of an elastic, transactional fintech ecosystem. It treats monetary operations as state transitions within an isolated, atomic boundary. 
 
-The architectural blueprint is engineered by cross-referencing industry standard frameworks:
-
-*
-
-**ISO/IEC 25010 Quality Model:** Maximizing *Functional Correctness* (zero overdraft) , *Reliability* (fault tolerance and maturity via transactional ledgers) , *Security* (non-repudiation and identity isolation) , and *Performance Efficiency* (asynchronous scale).
-
-*
-
-**AWS Well-Architected Framework:** Implementing *Operational Excellence* through comprehensive telemetry , *Security* via defense-in-depth and least-privilege service interactions , and *Reliability* by implementing automated recovery and asynchronous loose-coupling.
-
-*
-
-**iSAQB Core Principles:** Ensuring clean separation of concerns, explicit definition of system boundaries, domain-driven boundaries, and context-specific architectural views.
+The architecture aligns systematically with global industry standards:
+* **ISO/IEC 25010 Quality Model:** Maximizes *Functional Correctness* (zero-overdraft enforcement), *Reliability* (fault tolerance and database maturity via append-only ledger entries), *Security* (non-repudiation and transaction metadata containment), and *Performance Efficiency* (asynchronous horizontal scaling).
+* **AWS Well-Architected Framework:** Follows *Operational Excellence* through structured, machine-readable telemetry; *Security* via principle of least privilege and defense-in-depth data processing; and *Reliability* through automated transient error recovery and loose-coupling boundaries.
+* **iSAQB Core Principles:** Implements a strict *Separation of Concerns (SoC)*, explicitly drawing system perimeters and keeping domain models decoupled from infrastructure channels.
 
 ---
 
-## 2. Core Assumptions & Business Boundaries
+## 2. System Architecture & Core Design Patterns
 
-The system design relies on the following structural constraints and boundaries:
+The microservice balances low-latency responsiveness with absolute financial consistency by utilizing a **Dual-State Resilience Topology**. 
 
-### Upstream/Satelite System Boundaries
-
-The `ms-carteira-digital` isolates core financial value movements. It explicitly delegates out-of-domain functions to satelite systems managed by separate specialized teams:
-
-*
-
-**Customer Auth/Login Management:** Handles human identity federation, access tokens, and credential rotation.
-
-*
-
-**Fraud Detection Engine (Antifraud):** Evaluates behavioral transaction risks synchronously before financial settlement occurs.
-
-*
-
-**Data Protection & Privacy Vault:** Mandates zero exposure of Personally Identifiable Information (PII) within the transaction ledger.
-
-*
-
-**Core Account Management Engine:** Manages physical banking or deposit account status and external ledger funding.
-
-*
-
-**Notification Engine:** Assynchronously handles user alerts via Push, SMS, and Email.
-
-### Structural Business Restrictions
-
-*
-
-**Currency Constriction:** The service processes transactions exclusively using the Brazilian Real (BRL) currency.
-
-*
-
-**Cardinality Rules:** A single natural person (*Pessoa Física - PF*) can map to only one active account. Consequently, an account maps directly to **exactly one digital wallet instance**.
-
-*
-
-**Movement Limitations:** The wallet functions strictly as an append-only balance manager linking values to account structures. Overdraft configurations are explicitly forbidden; transactions cannot cause balances to fall below zero ($0.00$).
+### Core Engineering Mechanisms
+1.  **Append-Only Ledger Design:** To facilitate flawless financial auditing, balances are never edited directly via un-tracked updates. Every deposit, withdrawal, and transfer emits an immutable ledger record (`Movement`). The current balance is a deterministic projection of all successful ledger entries.
+2.  **Row-Level Pessimistic Locking:** To completely neutralize concurrent distributed race conditions (such as double-withdrawal attempts across competing horizontal threads), the engine uses a database-level `SELECT ... FOR UPDATE` isolation block. 
+3.  **Temporary Locked Balance Segregation:** When a debit sequence is initiated, the required funds are immediately carved out into a temporary `LOCKED` state within the database layer. This ensures that even if downstream external queues experience latency, those funds cannot be double-spent. The lock resolves to `DEDUCTED` upon successful completion or reverts smoothly to `AVAILABLE` upon failure.
 
 ---
 
-## 3. Transaction Flow & Orchestration Engine
+## 3. Architectural Design Records (ADRs)
 
-To safeguard the core ledger against distributed race conditions, all transactional requests pass through a centralized **Transaction Orchestrator**. The orchestrator functions as a state machine backed by Amazon DynamoDB for rapid distributed lock management and idempotency checks.
+### ADR 01: Centralized Transaction Orchestrator & Fail-Fast Pipeline
+* **Context:** Concurrent globally distributed transactions can hit the system simultaneously, creating risks of balance corruption, out-of-order execution, or downstream resource starvation.
+* **Decision:** All value altering state changes are governed by a centralized **Transaction Orchestrator** leveraging a fast, distributed lock check backed by Amazon DynamoDB for rapid screening.
+* **Consequences:** Enforces a rigid, zero-exception, multi-tier execution funnel before touching core relational tables:
+    1.  *Idempotency Screen:* Halts instantly if a transaction request with an identical unique identifier is actively running or completed.
+    2.  *Profile Vault Match:* Blocks execution if the client's CPF/CNPJ or parent account is frozen, blacklisted, or marked as inactive.
+    3.  *Synchronous Risk Assessment:* Drops processing if the behavioral scoring from the Antifraud Engine flags the event as anomalous.
+    4.  *Connectivity Check:* Verifies that the structural account bridge with the Core Checking Account Management system is open and valid.
 
-### The Fail-Fast Pipeline Validation
+### ADR 02: Dual-State Topology Resilience
+* **Context:** Message queues can experience sudden spikes in latency or backlogs during peak traffic windows. However, user interfaces demand predictable response windows when completing critical customer flows.
+* **Decision:** Implement an asynchronous processing layout as the default high-scale ingestion channel, complemented by an active **Synchronous Force-Exec Bypass** loop.
+* **Consequences:** If a client application polls for transaction status and the orchestrator reads the state as `PENDING`, the orchestration system triggers an explicit synchronous fallback `POST` request directly to the microservice SQL database core. This forces immediate transaction execution and unblocks the user interface safely without waiting for queue backlog drain.
 
-Before executing any state alteration within the relational database, the transaction orchestrator enforces a sequential **Fail-Fast** screening pipeline:
-
-```
-[BFF / Client Request]
-          │
-          ▼
-1. Idempotency Check ───────> [DynamoDB lookup via uuidv5_timestamp]
-          [cite_start]│                   * Abort instantly if duplicate request is active[cite: 277].
-          ▼
-2. PF Status Validation ────> [Query Profile Vault]
-          [cite_start]│                   * Block if CPF or account is inactive/frozen[cite: 300].
-          ▼
-3. Risk Assessment ─────────> [Query Antifraud Service]
-          [cite_start]│                   * Reject if behavioral flag is raised[cite: 303].
-          ▼
-4. Funding Source Check ────> [Query Core Account Management]
-          [cite_start]│                   * Verify structural account connectivity[cite: 306].
-          ▼
-5. Asynchronous Core Dispatch 
-
-```
-
-### Unified Idempotency Matrix
-
-To prevent duplicate financial settlements, every state change request must feature a deterministic idempotency handle generated via a SHA-1 `UUID v5` hash appended with a timestamp:
-
-$$\text{IdempotencyKey} = \text{uuidv5}(\text{from} + \text{to} + \text{valor}) + \text{"\_"} + \text{timestamp}$$
-
-| Transaction Type | Context | Source Identity (`from`) | Destination Identity (`to`) | Internal Operational Mechanics |
-| --- | --- | --- | --- | --- |
-| **UC06: Deposit** | Funding wallet | `accountId` (Core Bank Account) | `walletId` (Digital Wallet) | Captures value from external core checking account into the digital wallet.
-
-|
-| **UC07: Withdraw** | Defunding wallet | `walletId` (Digital Wallet) | `accountId` (Core Bank Account) | Retains and transfers value out of digital wallet to personal bank accounts.
-
-|
-| **UC08: Transfer** | Wallet Peer Shift | `walletId` (Origin Wallet) | `walletId` (Target Wallet) | Executes peer-to-peer balance adjustments inside the internal microservice ledger .
-
-|
+### ADR 03: Idempotency Key Enforced Verification
+* **Context:** Network dropouts, automatic client retries, and queue redeliveries can inject duplicate payloads into the processing boundary, introducing severe double-crediting risks.
+* **Decision:** The microservice treats every incoming command as strictly idempotent. It enforces a database-level unique constraint lookup against an external unique identifier (`transferId`) on all ledger entry executions.
+* **Consequences:** Re-submitting an already processed transaction results in an immediate, safe return of the original receipt metadata without modifying the database balance state or repeating business actions.
 
 ---
 
-## 4. Dual-State Resilience & Messaging Topology
+## 4. Core Assumptions & Business Boundaries
 
-The system handles write performance limits and network partitions through an asynchronous messaging model complemented by a synchronous fallback override loop.
+To deliver a pristine, zero-downtime execution block within a focused engineering scope, the following structural constraints and domain boundaries were established:
 
-### Asynchronous Event Topography
+### Satellite Domain Isolations
+* **Identity Federation Separation:** Human credential management, JWT validation, and token rotation are entirely delegated to the enterprise *Customer Auth/Login Provider*.
+* **Behavioral Protection Separation:** Deep entity risk scoring is decoupled and delegated to the specialized *Fraud Detection Engine*.
+* **PII Sanitization Constraint:** Personally Identifiable Information (PII) is completely isolated inside the *Privacy Vault*. The ledger interacts strictly with obfuscated UUID handles (`clientId`, `accountId`, `walletId`).
+* **Notification Engine Decoupling:** Emitting alerts via SMS, Push, or Email is handled entirely via out-of-band asynchronous event consumption by the *Notification Microservice*.
 
-Transactions route through dedicated AWS SQS queue networks and SNS topics to ensure structural decoupling :
-
-```
-                                  [Transaction Requests]
-                                            │
-                                            ▼
-                           [cite_start]Tópico: wallet-transaction-requests-topic [cite: 96]
-                                            │
-                                            ▼
-                           [cite_start]Fila: wallet-ms-transfer-commands-queue [cite: 97]
-                                            │
-                                            ▼
-                                  [MS Carteira Digital]
-                                            │
-                                            ▼
-                            [cite_start]Tópico: wallet-transaction-results-topic [cite: 106]
-                                            │
-                                            ▼
-                            [cite_start]Fila: orchestrator-wallet-callback-queue [cite: 108]
-                                            │
-                                            ▼
-                                [Update DynamoDB Engine]
-
-```
-
-### The Synchronous Fallback Mechanism (*Force Exec*)
-
-If the downstream consumer experiences latency and the processing state remains `PENDING` during a user check-status poll, the system routes through an explicit **Force Exec** desynchronization path:
-
-```
-[cite_start]BFF/Canal ──(Get Status)──> Transaction Orchestrator (DynamoDB Status: PENDING) [cite: 30, 202]
-                                │
-                        (POST /balance [Force Sync Mode]) [cite_start][cite: 83, 204]
-                                │
-                                ▼
-                      MS Carteira Digital (SQL Core)
-
-```
-
-> ⚠️ **Critical Double-Spending Counter-Measure:**
-> When executing a withdrawal or transfer request, `ms-carteira-digital` utilizes a relational `SELECT ... FOR UPDATE` isolation block or row-level pessimistic locking to isolate the user's available balance. The balance required for the transaction is moved to a temporary `LOCKED` state within the relational database row before initiating external actions. If the asynchronous queue successfully handles the movement later, or if a *Force Exec* call completes the request synchronously, the orchestrator clears the lock. If the operation reaches a final error state or exhausts all 3 execution retries, the orchestrator issues an internal command to release the temporary lock and revert the balance.
->
->
+### Strict Business Restrictions
+1.  **Monetary Monolith Bounds:** The ledger operates and clears calculations **exclusively using the Brazilian Real (BRL)** currency.
+2.  **Strict Identity Cardinality:** A single natural person (*Pessoa Física - PF*) maps to exactly one active account instance, which structurally maps to **exactly one digital wallet instance (Main Wallet)**.
+3.  **Zero-Overdraft Enforcement Rule:** Overdrafts, credit bounds, and negative balances are forbidden at the engine level. No business event can drive the ledger value below absolute zero ($0.00$).
 
 ---
 
-## 5. API Contracts & Interface Specifications
+## 5. Functional Capabilities & Use Cases
 
-The service surfaces its interfaces via standard REST endpoints utilizing structured JSON payloads:
+### Unified Idempotency Formula
+To guarantee deterministic execution tracking across all operational nodes, the unique tracking handle is established via a SHA-1 `UUID v5` hash generated from the immutable business variables combined with the origin request timestamp:
+
+$$\text{IdempotencyKey} = \text{uuidv5}(\text{fromIdentity} + \text{toIdentity} + \text{amount}) + \text{"\_"} + \text{timestamp}$$
+
+### Ledger Operations Matrix
+
+| Use Case           | Domain Context | Source Handle (`from`) | Destination Handle (`to`) | Operational Mechanics |
+|:-------------------| :--- | :--- | :--- | :--- |
+| **UC05: Deposit**  | External Funding | `accountId` (Checking Account) | `walletId` (Digital Wallet) | Pulls funds from an external core checking infrastructure and loads them into the digital wallet bounds. Emits an `INCOMING` entry. |
+| **UC06: Withdraw** | Value Defunding | `walletId` (Digital Wallet) | `accountId` (Checking Account) | Moves value out of the digital ecosystem back to a personal bank account. Performs pre-flight checks and records an `OUTGOING` entry. |
+| **UC04: Transfer** | Peer-to-Peer Shift | `walletId` (Origin Wallet) | `walletId` (Target Wallet) | Executes atomic inner-ledger balance rebalancing across two distinct digital wallets managed within this microservice core. |
+
+### Historical Time Travel Balance Reconstruction
+To fulfill audit mandates without storing infinite snapshot rows, the service uses an active **reverse-arithmetic ledger backtracking algorithm**. When a client requests the wallet balance at a specific point in the past (`atDate`), the service:
+1.  Fetches the live, real-time current balance from the database row.
+2.  Queries the immutable ledger table for all `COMPLETED` movements that occurred **after** the target date up until the current moment.
+3.  Reverses those operations mathematically: it **subtracts** subsequent `INCOMING` entries and **adds** subsequent `OUTGOING` entries back to the total.
+
+---
+
+## 6. API & Event Contracts (Interface Specifications)
+
+The microservice exposes clean, predictable endpoints using standard HTTP status codes:
+* `200 OK`: Successful retrieval of query states and calculations.
+* `201 Created`: Successful creation of entities or finalization of write operations.
+* `400 Bad Request`: Validation contract breakdown or attempt to violate the zero-overdraft rule.
+* `404 Not Found`: Target entity identifier does not exist in the database.
+* `500 Internal Server Error`: Infrastructure failure; triggers automatic alerts for the engineering team.
+
+### REST Endpoint Definitions
+
+#### GET `/wallets`
+Retrieves active digital wallet mappings matching user filters.
+* **Query Parameters:** `clientId` (Required, UUID), `accountId` (Required, UUID)
+* **Response Payload (`200 OK`):**
+```json
+{
+  "data": [
+    {
+      "id": "a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d",
+      "name": "Main Wallet",
+      "balance": 1500.50,
+      "clientId": "77112233-e5f6-7a8b-9c0d-1e2f3a4b5c6d",
+      "accountId": "88445566-e5f6-7a8b-9c0d-1e2f3a4b5c6d"
+    }
+  ]
+}
 
 ```
-# [cite_start]Matrix of API Status Codes & System Boundary Responses [cite: 250]
-[cite_start]200 OK          -> successful execution of get query operations[cite: 37, 250].
-[cite_start]201 Created     -> structural finalization of write workflows[cite: 38, 250].
-[cite_start]400 Bad Request -> failure of contract payload validation, or zero-overdraft violation[cite: 36, 250].
-[cite_start]404 Not Found   -> digital wallet identity matching constraints do not exist[cite: 35, 250].
-[cite_start]500 Error       -> critical platform issues; triggers automatic engineering infrastructure alerts[cite: 34, 250].
 
-```
+![System Architecture](./UC2.png)
 
-### GET `/wallets`
+#### GET `/wallets/{walletId}`
 
-Returns the active wallet identifier linked to the target customer identifier.
+Retrieves live or historical time-travel statements.
 
-*
-
-**Query Parameters:** `clientId` (Required), `accountId` (Required)
-
+* **Path Variable:** `walletId` (UUID)
+* **Query Parameter:** `atDate` (Optional, ISO-8601 UTC Timestamp format: `YYYY-MM-DDTHH:mm:ssZ`)
 * **Response Payload (`200 OK`):**
 
 ```json
 {
   "data": {
-    "wallets": [
-      {
-        "walletId": "wlt_91a0b3c2-d4e5-6f7g-8h9i-0j1k2l3m4n5o",
-        "walletName": "Main Digital Wallet"
-      }
-    ]
+    "walletId": "a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d",
+    "balance": 1500.50,
+    "asOfDate": "2026-05-29T21:30:00Z"
   }
 }
 
 ```
 
-### GET `/wallets/{walletId}`
+![System Architecture](./UC3.png)
 
-Retrieves balance information for a specific wallet. It supports a time travel parameter to reconstruct historic transaction records.
+#### POST `/wallets`
 
-*
+Standard structural creation endpoint.
 
-**Query Parameters:** `atDate` (Optional, ISO-8601 Timestamp)
-
-* **Response Payload (`200 OK`):**
+* **Request Body JSON:**
 
 ```json
 {
-  "data": {
-    "walletName": "Main Digital Wallet",
-    "walletBalance": 1500.50
-  }
+  "clientId": "33445566-e5f6-7a8b-9c0d-1e2f3a4b5c6d",
+  "accountId": "88772211-e5f6-7a8b-9c0d-1e2f3a4b5c6d"
 }
 
 ```
 
-### POST `/wallets`
+![System Architecture](./UC1.png)
 
-Initializes a single wallet structure with a baseline balance of zero.
+#### POST `/wallets/{walletId}/transfer` (Force Exec Fallback)
 
-* **Request Body Payload:**
+Direct synchronous input injection.
 
-```json
-{
-  "walletName": "Main Digital Wallet",
-  "accountId": "acc_88772211",
-  "clientId": "cli_33445566"
-}
-
-```
-
-### POST `/wallets/{walletId}/transfer`
-
-Direct synchronous bypass used by the orchestrator engine during a fallback event.
-
-* **Request Body Payload:**
+* **Request Body JSON:**
 
 ```json
 {
   "transferId": "tx_77665544",
   "amount": 250.00,
   "counterparty": {
-    "id": "wlt_91a0b3c2-d4e5"
+    "id": "external_source_id"
   }
 }
+
 ```
 
-* **Response Body Payload:**
+![System Architecture](./UC4.png)
 
-```json
-{
-  "data": {
-    "transferId": "tx_77665544",
-    "status" "COMPLETED"
-  }
-}
-```
+#### POST `/wallets/{walletId}/deposit` (Force Exec Fallback)
 
-* **Assync** `/transfer`
+Direct synchronous input injection.
 
-```json
-{
-  "transferId": "tx_77665544",
-  "id": "wlt_91a0b3c2-d4e5",
-  "type": "TRANSFER", 
-  "amount": 250.00,
-  "counterparty": {
-    "id": "wlt_91a0b3c2-d4e5"
-  }
-}
-```
-
-### POST `/wallets/{accountId}/deposit`
-
-Direct synchronous bypass used by the orchestrator engine during a fallback event.
-
-* **Request Body Payload:**
+* **Request Body JSON:**
 
 ```json
 {
   "transferId": "tx_77665544",
   "amount": 250.00,
   "counterparty": {
-    "id": "wlt_91a0b3c2-d4e5"
+    "id": "external_source_id"
   }
 }
+
 ```
 
-* **Response Body Payload:**
+![System Architecture](./UC5.png)
 
-```json
-{
-  "data": {
-    "transferId": "tx_77665544",
-    "status" "COMPLETED"
-  }
-}
-```
+#### POST `/wallets/{walletId}/withdraw` (Force Exec Fallback)
 
-* **Assync** `/deposit`
+Direct synchronous withdrawal processing.
 
-```json
-{
-  "transferId": "tx_77665544",
-  "id": "wlt_91a0b3c2-d4e5",
-  "type": "DEPOSIT", 
-  "amount": 250.00,
-  "counterparty": {
-    "id": "wlt_91a0b3c2-d4e5"
-  }
-}
-```
+* **Request Body JSON:** Same as deposit schema.
 
-### POST `/wallets/{walletId}/withdraw`
+### Asynchronous Message Contracts (RabbitMQ Target Queue)
 
-Direct synchronous bypass used by the orchestrator engine during a fallback event.
-
-* **Request Body Payload:**
+Messages entering the ingestion pipeline through `wallet-ms-transfer-commands-queue` must align with the following JSON model:
 
 ```json
 {
   "transferId": "tx_77665544",
+  "id": "a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d",
+  "type": "TRANSFER",
   "amount": 250.00,
   "counterparty": {
-    "id": "wlt_91a0b3c2-d4e5"
+    "id": "wlt_91a0b3c2-d4e5-6f7g-8h9i-0j1k2l3m4n5o"
   }
 }
+
 ```
 
-* **Response Body Payload:**
-
-```json
-{
-  "data": {
-    "transferId": "tx_77665544",
-    "status" "COMPLETED"
-  }
-}
-```
-
-* **Assync** `/withdraw`
-
-```json
-{
-  "transferId": "tx_77665544",
-  "id": "wlt_91a0b3c2-d4e5",
-  "type": "WITHDRAW", 
-  "amount": 250.00,
-  "counterparty": {
-    "id": "wlt_91a0b3c2-d4e5"
-  }
-}
-```
+![System Architecture](./UC6.png)
 
 ---
 
-## 6. Governance, Observability & Quality Assurance
+## 7. Observability, Telemetry & QA Guardrails
 
-To fulfill the technical and operational readiness metrics required for high-availability deployments, the microservice implements automated quality checks throughout its delivery cycle .
+### ECS-Compliant Mapped Diagnostic Context (MDC) Logging
 
-### Unified Telemetry Logging Standard
-
-To ensure audit compliance and visibility, every operational log must output in structural JSON format and include four required tracing variables:
+To ensure end-to-end tracing across async message hops, logs are emitted as single-line JSON items structured under the **Elastic Common Schema (ECS)** specifications, embedding required business context variables inside the MDC labels node:
 
 ```json
 {
   "@timestamp": "2026-05-29T15:21:00.123Z",
   "log.level": "INFO",
-  "message": "Consultando saldo atual do livro-razão",
+  "message": "Ledger transaction processed successfully by core engine",
   "service.name": "ms-wallet-digital",
-  "process.thread.name": "http-nio-8080-exec-1",
-  "log.logger": "com.poc.controller.WalletsController",
+  "process.thread.name": "RabbitMqConsumerContainer-1",
+  "log.logger": "com.poc.ms_wallet_digital.services.WalletService",
   "labels": {
-    "correlation_id": "bf889c22-e19a-4712-8877-221133445566",
-    "flow": "wallet_query_v1",
-    "wallet_id": "a3b2c1d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d"
+    "correlation_id": "tx_77665544",
+    "flow": "async_transfer",
+    "wallet_id": "a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d"
   }
 }
 
 ```
 
-### Continuous Integration & Testing Guardrails
+### Real-Time Micrometer Metrics Tracking
 
-Deployment pipelines are automated using a git-based layout and adhere to strict quality rules :
+Successful ledger commits trigger real-time metric updates through Micrometer bindings, registering on Prometheus with status tags matching the transactional outcome (`SUCCESS` or `FAILED`), and operation context (`DEPOSIT`, `WITHDRAW`, `TRANSFER`).
+
+### Pipeline Testing Guardrails
+
+Our integration pipeline establishes three absolute gates that code changes must clear before automated Canary staging on Amazon EKS can occur:
+
+1. **SonarQube Validation Gate:** Instantly blocks pull requests containing code smells, security vulnerabilities, or exposed operational secrets.
+2. **The 80% Coverage Requirement Rule:** Enforces a rigid **80% line test coverage minimum** via JaCoCo across all domain services.
+3. **The 80% Mutation Score Rule:** Enforces an active **80% mutation kill score via PITest**. This forces tests to validate behavioral assertions (by destroying artificially injected byte-code mutants) rather than just executing lines.
+
+---
+
+## 8. Engineering Compromises, Trade-offs & Time Investment
+
+To fulfill the requirements within a practical development window while ensuring a production-grade codebase, the following professional engineering trade-offs were consciously implemented:
+
+### Implemented Trade-offs & Rationale
+
+* **H2 Testing Slice Database substitution:** Instead of wiring a dynamic Testcontainers Docker sequence for PostgreSQL during repository layer unit verification, we substituted an in-memory `H2 Database` profile. This significantly speeds up pipeline verification times while testing derived method queries safely.
+* **Optimistic Read / Pessimistic Write balance:** We utilized a row-level `LockModeType.PESSIMISTIC_WRITE` on critical mutations while keeping balance lookups completely lock-free via clean read-only transaction scopes. This maximizes query performance while protecting write mutations against concurrent corruption.
+* **Micrometer SimpleMeterRegistry abstraction:** Rather than embedding a heavy network-connected push gateway infrastructure for metrics during local testing, we introduced Micrometer’s `SimpleMeterRegistry` in the service test environment. This tests the metrics engine logic without introducing infrastructure bottlenecks.
+
+### Total Time Investment
+
+* **Architecture, Model Modeling & ADR Documentation:** ~2.0 Hours
+* **JPA Relational Mapping & Data Layer Testing (`@DataJpaTest`):** ~2.0 Hours
+* **Core Business Logic Engine Development (`WalletService`):** ~2.0 Hours
+* **Asynchronous Message Handlers & Controller Web Suite Validation:** ~1.5 Hours
+* **Total Project Execution Window:** **~7.5 Hours**
+
+---
+
+## 9. Local Infrastructure Quickstart Manual
+
+The environment is containerized via Docker Compose to spin up a local replica of our cloud infrastructure topology.
+
+### Quick Start Setup Script
+
+```bash
+# 1. Spin up the infrastructure components in the background
+docker compose up -d
+
+# 2. Compile, run static code verification, and execute all test suites
+./gradlew clean test
+
+# 3. Launch the Spring Boot application using the dedicated local profile
+./gradlew bootRun --args='--spring.profiles.active=local'
 
 ```
-[cite_start][Code Push] ──> [SonarQube Verification] ──> [Test Pyramid Run] ──> [Canary Rollout] [cite: 112, 113, 258, 260]
 
-```
+### Infrastructure Endpoint Directory
 
-*
+Once the containers are online, the following administration panels and diagnostic endpoints are accessible locally:
 
-**SonarQube Gates:** Rejects code changes if code smells are discovered, static code patterns breach alignment rules, or hardcoded sensitive variables are exposed.
+| Infrastructure Tool | Local Web Portal URL | Authentication Defaults | Operational Role within Ecosystem |
+| --- | --- | --- | --- |
+| **Swagger UI Docs** | [http://localhost:8080/swagger-ui/index.html](https://www.google.com/search?q=http://localhost:8080/swagger-ui/index.html) | *Open Access* | Interactive REST API portal for payload verification and manual execution testing. |
+| **RabbitMQ Console** | [http://localhost:15672](https://www.google.com/search?q=http://localhost:15672) | `admin` / `admin` | Real-time broker platform management panel to track queue volumes and message routing. |
+| **Prometheus Telemetry** | [http://localhost:9090](https://www.google.com/search?q=http://localhost:9090) | *Open Access* | Scraping time-series datastore that aggregates Micrometer counters emitted from the service. |
+| **Grafana Dashboards** | [http://localhost:3000/login](https://www.google.com/search?q=http://localhost:3000/login) | `admin` / `admin` | Visualization interface wired to generate analytical health displays of the clearing ledger engine. |
+| **SonarQube Server** | [http://localhost:9000](https://www.google.com/search?q=http://localhost:9000) | `admin` / `admin` | Local static code analysis cockpit assessing quality gates and lint health. |
 
-* **The Code Quality Pyramid:**
-*
-
-**Unit Tests:** Enforces a minimum **80% line test coverage requirement** across all domain logic modules.
-
-*
-
-**Mutation Testing:** Enforces a **80% mutation target score** via PITest. This guarantees that unit test suites are robust enough to catch logic mutations, rather than just hitting code coverage metrics.
-
-*
-
-**E2E Contract Specifications:** Enforces automated API schema checks to protect against breaking changes in interface models.
-
-*
-
-**Production Release Profile:** Relies on **Canary Deployments** on Amazon EKS. Traffic shifts progressively to the new build while monitoring platform exception metrics. Any increase in HTTP `500` status codes automatically stops the deployment and triggers an immediate rollback.
+---
