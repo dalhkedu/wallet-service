@@ -26,8 +26,17 @@ dependencies {
     runtimeOnly("io.micrometer:micrometer-registry-prometheus")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.5")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.springframework.boot:spring-boot-starter-data-jpa-test")
     testImplementation("org.springframework.boot:spring-boot-starter-webmvc-test")
     implementation("org.springframework.boot:spring-boot-starter-amqp")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    runtimeOnly("org.postgresql:postgresql")
+    compileOnly("org.projectlombok:lombok")
+    annotationProcessor("org.projectlombok:lombok")
+    testCompileOnly("org.projectlombok:lombok")
+    testAnnotationProcessor("org.projectlombok:lombok")
+    testImplementation("com.h2database:h2")
+
 }
 
 jacoco {
@@ -72,4 +81,7 @@ tasks.withType<Test> {
         events("passed", "skipped", "failed")
     }
     finalizedBy(tasks.jacocoTestReport)
+    extensions.configure<JacocoTaskExtension> {
+        excludes = listOf("com/poc/ms_wallet_digital/controllers/requests/**")
+    }
 }

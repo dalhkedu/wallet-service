@@ -4,18 +4,28 @@ import com.poc.ms_wallet_digital.advices.GlobalExceptionHandler;
 import com.poc.ms_wallet_digital.controllers.requests.CounterpartyRequestDTO;
 import com.poc.ms_wallet_digital.controllers.requests.TransactionRequestDTO;
 import com.poc.ms_wallet_digital.controllers.requests.WalletCreateRequestDTO;
+import com.poc.ms_wallet_digital.controllers.responses.TransactionResponseDTO;
+import com.poc.ms_wallet_digital.controllers.responses.WalletBalanceResponseDTO;
+import com.poc.ms_wallet_digital.controllers.responses.WalletResponseDTO;
+import com.poc.ms_wallet_digital.enums.StatusEnum;
+import com.poc.ms_wallet_digital.services.WalletService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import tools.jackson.databind.ObjectMapper;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -28,15 +38,31 @@ class WalletsControllerTest {
     private static final UUID TEST_WALLET_ID = UUID.randomUUID();
     private static final UUID TEST_CLIENT_ID = UUID.randomUUID();
     private static final UUID TEST_ACCOUNT_ID = UUID.randomUUID();
+
     @Autowired
     private MockMvc mockMvc;
+
     @Autowired
     private ObjectMapper objectMapper;
+
+    @MockitoBean
+    private WalletService walletService;
 
     @Test
     @DisplayName("Deve criar uma carteira com sucesso retornando 201 CREATED")
     void testCreateWalletSuccess() throws Exception {
         WalletCreateRequestDTO request = new WalletCreateRequestDTO(TEST_CLIENT_ID, TEST_ACCOUNT_ID);
+
+        var mockResponse = new WalletResponseDTO(
+                TEST_WALLET_ID,
+                "Main Wallet",
+                new BigDecimal("1500.50"),
+                TEST_CLIENT_ID,
+                TEST_ACCOUNT_ID
+        );
+
+        Mockito.when(walletService.initializeOrGetMainWallet(eq(TEST_CLIENT_ID), eq(TEST_ACCOUNT_ID)))
+                .thenReturn(mockResponse);
 
         mockMvc.perform(post(BASE_URL)
                         .contentType(MediaType.APPLICATION_JSON)
@@ -58,6 +84,18 @@ class WalletsControllerTest {
     @Test
     @DisplayName("Deve retornar lista de carteiras com sucesso retornando 200 OK")
     void testGetWalletsByClientSuccess() throws Exception {
+
+        var mockResponse = new WalletResponseDTO(
+                TEST_WALLET_ID,
+                "Main Wallet",
+                new BigDecimal("1500.50"),
+                TEST_CLIENT_ID,
+                TEST_ACCOUNT_ID
+        );
+
+        Mockito.when(walletService.findWallets(eq(TEST_CLIENT_ID), eq(TEST_ACCOUNT_ID)))
+                .thenReturn(List.of(mockResponse));
+
         mockMvc.perform(get(BASE_URL)
                         .param("clientId", TEST_CLIENT_ID.toString())
                         .param("accountId", TEST_ACCOUNT_ID.toString())
@@ -98,19 +136,39 @@ class WalletsControllerTest {
     @Test
     @DisplayName("Deve retornar saldo atual da carteira retornando 200 OK")
     void testGetWalletBalanceSuccess() throws Exception {
+
+        var mockResponse = new WalletBalanceResponseDTO(
+                TEST_WALLET_ID,
+                new BigDecimal("1500.50"),
+                null
+        );
+
+        Mockito.when(walletService.getBalanceAtDate(eq(TEST_WALLET_ID), any()))
+                .thenReturn(mockResponse);
+
+
         mockMvc.perform(get(BASE_URL + "/" + TEST_WALLET_ID)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.data").exists())
-                .andExpect(jsonPath("$.data.name", is("Main Wallet")))
-                .andExpect(jsonPath("$.data.amount", is(1500.50)));
+                .andExpect(jsonPath("$.data.walletId").value(TEST_WALLET_ID.toString()))
+                .andExpect(jsonPath("$.data.balance").value(1500.50));
     }
 
     @Test
     @DisplayName("Deve retornar saldo em data específica quando parâmetro atDate é fornecido")
     void testGetWalletBalanceWithAtDateParameter() throws Exception {
-        String atDate = "2024-01-15T10:30:00-03:00";
+        String atDate = "2024-01-01T00:00:00Z";
+
+        var mockResponse = new WalletBalanceResponseDTO(
+                TEST_WALLET_ID,
+                new BigDecimal("1500.50"),
+                null
+        );
+
+        Mockito.when(walletService.getBalanceAtDate(eq(TEST_WALLET_ID), any()))
+                .thenReturn(mockResponse);
 
         mockMvc.perform(get(BASE_URL + "/" + TEST_WALLET_ID)
                         .param("atDate", atDate)
@@ -132,6 +190,14 @@ class WalletsControllerTest {
     @DisplayName("Deve depositar fundos com sucesso retornando 201 CREATED")
     void testDepositFundsSuccess() throws Exception {
         var request = new TransactionRequestDTO("DEPOSIT-001", new BigDecimal("200.00"), new CounterpartyRequestDTO(TEST_WALLET_ID));
+
+        var mockResponse = new TransactionResponseDTO(
+                "DEPOSIT-001",
+                StatusEnum.COMPLETED
+        );
+
+        Mockito.when(walletService.processTransaction(any(TransactionRequestDTO.class)))
+                .thenReturn(mockResponse);
 
         mockMvc.perform(post(BASE_URL + "/" + TEST_WALLET_ID + "/deposit")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -164,6 +230,14 @@ class WalletsControllerTest {
     @DisplayName("Deve sacar fundos com sucesso retornando 201 CREATED")
     void testWithdrawFundsSuccess() throws Exception {
         var request = new TransactionRequestDTO("WITHDRAW-001", new BigDecimal("200.00"), new CounterpartyRequestDTO(TEST_WALLET_ID));
+
+        var mockResponse = new TransactionResponseDTO(
+                "WITHDRAW-001",
+                StatusEnum.COMPLETED
+        );
+
+        Mockito.when(walletService.processTransaction(any(TransactionRequestDTO.class)))
+                .thenReturn(mockResponse);
 
         mockMvc.perform(post(BASE_URL + "/" + TEST_WALLET_ID + "/withdraw")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -200,6 +274,14 @@ class WalletsControllerTest {
         var toRequest = new CounterpartyRequestDTO(toWalletId);
         TransactionRequestDTO request = new TransactionRequestDTO(
                 "TRANSFER-001", new BigDecimal("100.00"), toRequest);
+
+        var mockResponse = new TransactionResponseDTO(
+                "TRANSFER-001",
+                StatusEnum.COMPLETED
+        );
+
+        Mockito.when(walletService.processTransaction(any(TransactionRequestDTO.class)))
+                .thenReturn(mockResponse);
 
         mockMvc.perform(post(BASE_URL + "/" + TEST_WALLET_ID + "/transfer")
                         .contentType(MediaType.APPLICATION_JSON)

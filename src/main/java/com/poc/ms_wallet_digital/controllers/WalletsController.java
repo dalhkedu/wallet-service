@@ -4,8 +4,8 @@ import com.poc.ms_wallet_digital.configs.logging.TraceContext;
 import com.poc.ms_wallet_digital.controllers.requests.TransactionRequestDTO;
 import com.poc.ms_wallet_digital.controllers.requests.WalletCreateRequestDTO;
 import com.poc.ms_wallet_digital.controllers.responses.*;
-import com.poc.ms_wallet_digital.enums.StatusEnum;
 import com.poc.ms_wallet_digital.enums.TransactionTypeEnum;
+import com.poc.ms_wallet_digital.services.WalletService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -18,9 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.time.OffsetDateTime;
-import java.util.List;
 import java.util.UUID;
 
 
@@ -30,6 +28,11 @@ import java.util.UUID;
 public class WalletsController {
 
     private static final Logger log = LoggerFactory.getLogger(WalletsController.class);
+    private final WalletService walletService;
+
+    public WalletsController(WalletService walletService) {
+        this.walletService = walletService;
+    }
 
     @Operation(
             summary = "Consulting Wallet Balance",
@@ -42,17 +45,16 @@ public class WalletsController {
             @ApiResponse(responseCode = "404", description = "The specified wallet was not found in the database.")
     })
 
+
     @PostMapping
     public ResponseEntity<DataResponse<WalletResponseDTO>> createWallet(@RequestBody @NotNull WalletCreateRequestDTO request) {
 
         TraceContext.enrich(request.clientId(), request.accountId(), null);
         log.info("Creating wallet for clientId: {} and accountId: {}", request.clientId(), request.accountId());
 
-        // Logica Verifica se existe na base sql a carteira para o cliente e conta, caso contrário, cria a carteira principal automaticamente
+        var wallet = walletService.initializeOrGetMainWallet(request.clientId(), request.accountId());
 
-        WalletResponseDTO response = new WalletResponseDTO(
-                UUID.randomUUID(), "Wallet", UUID.randomUUID(), UUID.randomUUID());
-        return ResponseEntity.status(HttpStatus.CREATED).body(DataResponse.of(response));
+        return ResponseEntity.status(HttpStatus.CREATED).body(DataResponse.of(wallet));
     }
 
 
@@ -64,13 +66,9 @@ public class WalletsController {
         TraceContext.enrich(clientId, accountId, null);
         log.info("Consulting wallets for clientId: {} and accountId: {}", clientId, accountId);
 
-        // Logica verifica se existe na base sql a carteira para o cliente e conta, caso nao existir,
-        // retorna lista vazia com not found, caso contrário, retorna a lista de carteiras do cliente e conta
+        var wallets = walletService.findWallets(clientId, accountId);
 
-        WalletListResponseDTO list = new WalletListResponseDTO(
-                List.of(new WalletResponseDTO(
-                        UUID.randomUUID(), "Wallet", accountId, clientId))
-        );
+        WalletListResponseDTO list = new WalletListResponseDTO(wallets);
 
         return ResponseEntity.ok(DataResponse.of(list));
     }
@@ -84,13 +82,9 @@ public class WalletsController {
         TraceContext.enrichWallet(walletId);
         log.info("Consulting wallet balance for walletId: {} and atDate: {}", walletId, atDate);
 
-        // Logica verifica se existe na base sql a carteira para o walletId, caso nao existir, retorna not found,
-        // caso contrário, retorna o saldo da carteira para a data especificada
+        var wallet = walletService.getBalanceAtDate(walletId, atDate);
 
-        WalletBalanceResponseDTO balance = new WalletBalanceResponseDTO(
-                "Main Wallet", BigDecimal.valueOf(1500.50));
-
-        return ResponseEntity.ok(DataResponse.of(balance));
+        return ResponseEntity.ok(DataResponse.of(wallet));
     }
 
     @PostMapping("/{walletId}/transfer")
@@ -105,16 +99,10 @@ public class WalletsController {
         log.info("Starting transfer from walletId: {} to walletId: {} with amount: {}",
                 walletId, request.getCounterparty().id(), request.getAmount());
 
-        // Verifica se existe na base sql a carteira para o walletId, caso nao existir, retorna not found,
-        // caso contrário, verifica se a carteira de destino existe, caso nao existir, retorna not found
-        // caso contrário, verifica se o saldo é suficiente para a transferência, caso contrário, retorna bad request
-        // caso contrário, realiza a transferência, atualiza os saldos das carteiras e retorna o status da transação
+        var movement = walletService.processTransaction(request);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(
-                DataResponse.of(
-                        new TransactionResponseDTO(
-                                "35cbb982-9947-451c-a651-db79595c6c53_timestamp",
-                                StatusEnum.COMPLETED)));
+                DataResponse.of(movement));
     }
 
     @PostMapping("/{walletId}/deposit")
@@ -127,18 +115,11 @@ public class WalletsController {
 
         TraceContext.enrichWallet(walletId);
         log.info("Starting deposit to walletId: {} with amount: {}", walletId, request.getAmount());
-        ;
 
-        // Verifica se existe na base sql a carteira para o walletId, caso nao existir, retorna not found,
-        // caso contrario, consulta em contas a conta de origem do depósito, caso nao existir, retorna not found
-        // caso contrário, verifica se a conta de origem tem saldo suficiente para o depósito, caso contrário, retorna bad request
-        // caso contrário, realiza o depósito, atualiza o saldo da conta de origem e da carteira de destino, e retorna o status da transação
+        var movement = walletService.processTransaction(request);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(
-                DataResponse.of(
-                        new TransactionResponseDTO(
-                                "35cbb982-9947-451c-a651-db79595c6c53_timestamp",
-                                StatusEnum.COMPLETED)));
+                DataResponse.of(movement));
     }
 
     @PostMapping("/{walletId}/withdraw")
@@ -152,15 +133,9 @@ public class WalletsController {
         TraceContext.enrichWallet(walletId);
         log.info("Starting withdrawal from walletId: {} with amount: {}", walletId, request.getAmount());
 
-        // Verifica se existe na base sql a carteira para o walletId, caso nao existir, retorna not found,
-        // caso contrário, consulta em contas a conta de destino do saque, caso nao existir, retorna not found
-        // caso contrário, verifica se a carteira tem saldo suficiente para o saque, caso contrário, retorna bad request
-        // caso contrário, realiza o saque, atualiza o saldo da carteira de origem e da conta de destino, e retorna o status da transação
+        var movement = walletService.processTransaction(request);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(
-                DataResponse.of(
-                        new TransactionResponseDTO(
-                                "35cbb982-9947-451c-a651-db79595c6c53_timestamp",
-                                StatusEnum.COMPLETED)));
+                DataResponse.of(movement));
     }
 }
