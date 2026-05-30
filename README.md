@@ -309,6 +309,6 @@ Once the containers are online, the following administration panels and diagnost
 | **RabbitMQ Console** | [http://localhost:15672](https://www.google.com/search?q=http://localhost:15672) | `admin` / `admin` | Real-time broker platform management panel to track queue volumes and message routing. |
 | **Prometheus Telemetry** | [http://localhost:9090](https://www.google.com/search?q=http://localhost:9090) | *Open Access* | Scraping time-series datastore that aggregates Micrometer counters emitted from the service. |
 | **Grafana Dashboards** | [http://localhost:3000/login](https://www.google.com/search?q=http://localhost:3000/login) | `admin` / `admin` | Visualization interface wired to generate analytical health displays of the clearing ledger engine. |
-| **SonarQube Server** | [http://localhost:9000](https://www.google.com/search?q=http://localhost:9000) | `admin` / `admin` | Local static code analysis cockpit assessing quality gates and lint health. |
+| **SonarQube Server** | [http://localhost:9000](https://www.google.com/search?q=http://localhost:9000) | `platform_admin` / `secure_password` | Local static code analysis cockpit assessing quality gates and lint health. |
 
 ---
